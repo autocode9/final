@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fieldMapper">
+
+	<resultMap type="field" id="fieldResultMap">
+		<result column="FIELD_NO" 	property="fieldNo" />
+		<result column="FIELD_NAME" property="fieldName" />
+		<result column="LOCATION" 	property="location" />
+		<result column="GROUND" 	property="ground" />
+		<result column="SIZE" 		property="size" />
+		<result column="BUILT_YEAR" property="builtYear" />
+	</resultMap>
+	
+	<select id="countFields" parameterType="hashmap" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       FIELD
+		<if test="query != 'all'">
+	     <choose>
+	     	<when test="query != 'all' and category == 'all'">
+	     WHERE FIELD_NAME LIKE '%' || #{query} || '%' 
+	        OR CITY 	  LIKE '%' || #{query} || '%'
+	        OR DISTRICT   LIKE '%' || #{query} || '%'
+	     	</when>
+	     	<when test="query != 'all' and category == 'fieldName'">
+	     WHERE FIELD_NAME LIKE '%' || #{query} || '%' 
+	     	</when>
+	     	<when test="query != 'all' and category == 'location'">
+	     WHERE CITY   	  LIKE '%' || #{query} || '%'
+	        OR DISTRICT   LIKE '%' || #{query} || '%'
+	     	</when>
+	     </choose>
+	     </if>       
+	</select>
+	
+	<select id="selectFields" parameterType="hashmap" resultMap="fieldResultMap">
+		SELECT
+		       FIELD_NO,
+			   FIELD_NAME,
+			   CITY || ' ' || DISTRICT AS LOCATION,
+			   GROUND,
+			   WIDTH || 'm' || ' x ' || LENGTH || 'm' AS "SIZE",
+			   BUILT_YEAR
+	      FROM
+	           FIELD
+	     <if test="query != 'all'">
+	     <choose>
+	     	<when test="query != 'all' and category == 'all'">
+	     WHERE FIELD_NAME LIKE '%' || #{query} || '%' 
+	        OR CITY 	  LIKE '%' || #{query} || '%'
+	        OR DISTRICT   LIKE '%' || #{query} || '%'
+	     	</when>
+	     	<when test="query != 'all' and category == 'fieldName'">
+	     WHERE FIELD_NAME LIKE '%' || #{query} || '%' 
+	     	</when>
+	     	<when test="query != 'all' and category == 'location'">
+	     WHERE CITY   	  LIKE '%' || #{query} || '%'
+	        OR DISTRICT   LIKE '%' || #{query} || '%'
+	     	</when>
+	     </choose>
+	     </if>
+	     ORDER
+	        BY 
+	           FIELD_NO
+	</select>
+	
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/> <!-- 빈문자열을 null로 판단 -->
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.remake.weplay.city.model.vo.City" alias="city"/>
+		<typeAlias type="com.remake.weplay.team.model.vo.Team" alias="team"/>
+		<typeAlias type="com.remake.weplay.team.model.vo.TeamMember" alias="teamMember"/>
+		<typeAlias type="com.remake.weplay.team.model.vo.TeamApplication" alias="teamApplication"/>
+		<typeAlias type="com.remake.weplay.member.model.vo.Member" alias="member"/>
+		<typeAlias type="com.remake.weplay.teamBoardBrg.model.vo.TeamBoardBrg" alias="teamBoardBrg"/>
+		<typeAlias type="com.remake.weplay.teamBoard.model.vo.TeamBoard" alias="teamBoard"/>
+		<typeAlias type="com.remake.weplay.field.model.vo.Field" alias="field"/>
+		<typeAlias type="com.remake.weplay.match.model.vo.Match" alias="match"/>
+		<typeAlias type="com.remake.weplay.match.model.vo.MatchApplication" alias="matchApplication"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="/mapper/city-mapper.xml" />
+		<mapper resource="/mapper/team-mapper.xml" />
+		<mapper resource="/mapper/teamApplication-mapper.xml" />
+		<mapper resource="/mapper/member-mapper.xml" />
+		<mapper resource="/mapper/teamBoardBrg-mapper.xml" />
+		<mapper resource="/mapper/teamBoard-mapper.xml" />
+		<mapper resource="/mapper/field-mapper.xml" />
+		<mapper resource="/mapper/match-mapper.xml" />
+		<mapper resource="/mapper/teamMember-mapper.xml" />
+	</mappers>
+</configuration>
