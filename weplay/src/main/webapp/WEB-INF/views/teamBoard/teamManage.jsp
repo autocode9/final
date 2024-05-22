@@ -52,6 +52,7 @@
 	width: 90%;
 	height: 30px;
 }
+ #pagingArea {width:fit-content; margin:auto;}
 </style>
 </head>
 <body>
@@ -75,6 +76,8 @@
 
 		<div class="tab-content">
 			<div class="tab-pane container active" id="home">
+			<h3>가입 신청한 인원</h3>
+			
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -127,10 +130,43 @@
 						</c:choose>
 					</tbody>
 				</table>
+				<div id="pagingArea">
+				    <ul class="pagination">
+				        <c:choose>
+				            <c:when test="${ pageInfo.currentPage == 1 }">
+				                <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+				            </c:when>
+				            <c:otherwise>
+				                <li class="page-item">
+				                    <a class="page-link" href="approveList.do?teamNo=${map.teamNo}&page=${ pageInfo.currentPage - 1 }">이전</a>
+				                </li>
+				            </c:otherwise>
+				        </c:choose>
+				
+				        <c:forEach var="p" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+				            <li class="page-item ${ p == pageInfo.currentPage ? 'active' : ''}">
+				                <a class="page-link" href="approveList.do?teamNo=${map.teamNo}&page=${p}">${p}</a>
+				            </li>
+				        </c:forEach>
+				
+				        <c:choose>
+				            <c:when test="${ pageInfo.currentPage == pageInfo.maxPage }">
+				                <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+				            </c:when>
+				            <c:otherwise>
+				                <li class="page-item">
+				                    <a class="page-link" href="approveList.do?teamNo=${map.teamNo}&page=${ pageInfo.currentPage + 1 }">다음</a>
+				                </li>
+				            </c:otherwise>
+				        </c:choose>
+				    </ul>
+				</div>
+								
 			</div>
 			
 			
 			<div class="tab-pane container fade" id="menu1">
+				<h3>현재 팀 인원</h3>
 				<table class="table table-bordered">
 					<thead>
 						<tr>

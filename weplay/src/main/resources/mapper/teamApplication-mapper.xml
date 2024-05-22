@@ -36,7 +36,7 @@
 		(SEQ_TANO.NEXTVAL, #{ memberNo }, #{ teamNo }, #{ applyContent })
 	</insert>
 	
-	<select id="selectTeamApplication"  resultMap="teamApplicationResultSet">
+	<select id="selectTeamApplication"  parameterType="hashmap" resultMap="teamApplicationResultSet">
 	SELECT TA.APPLY_NO,
 		TA.MEMBER_NO,
 		TA.TEAM_NO,
@@ -49,6 +49,16 @@
 	JOIN MEMBER M ON TA.MEMBER_NO = M.MEMBER_NO
 	JOIN TEAM T ON TA.TEAM_NO = T.TEAM_NO
 	WHERE TA.TEAM_NO = #{teamNo}
+	</select>
+	
+	<select id="selectTeamApplicationCount" parameterType="hashmap" resultType="_int">
+	SELECT
+		COUNT(*)
+	FROM
+		TEAM_APPLICATION
+	WHERE
+		TEAM_NO = #{teamNo}
+	
 	</select>
 	
 	<update id="update" parameterType="teamApplication">

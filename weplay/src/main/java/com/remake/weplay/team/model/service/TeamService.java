@@ -21,11 +21,14 @@ public interface TeamService {
 	
 	int joinTeam(TeamApplication teamApp);
 	
-	//팀 신청자 목록
-	List<TeamApplication> selectTeamApplication(int teamNo);
 	
 	int insertTeam(TeamMember teamMember);
 	
 	int updateTeamApp(TeamApplication teamApp);
+	
+	//팀 신청자 목록
+	List<TeamApplication> selectTeamApplication(HashMap<String, String> map, RowBounds rowBounds);
+	//팀신청 카운트
+	int selectTeamApplicationCount(HashMap<String, String> map);
 
 }

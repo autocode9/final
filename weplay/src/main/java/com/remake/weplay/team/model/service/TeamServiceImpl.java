@@ -46,11 +46,6 @@ public class TeamServiceImpl implements TeamService {
 		return teamRepository.joinTeam(sqlSession, teamApp);
 	}
 	
-	//팀 신청자 목록
-	@Override
-	public List<TeamApplication> selectTeamApplication(int teamNo) {
-		return teamRepository.selectTeamApplication(sqlSession, teamNo);
-	}
 
 	@Override
 	public int insertTeam(TeamMember teamMember) {
@@ -60,6 +55,18 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public int updateTeamApp(TeamApplication teamApp) {
 		return teamRepository.updateTeamApp(sqlSession,teamApp);
+	}
+
+	
+	//팀 신청자 목록
+	@Override
+	public List<TeamApplication> selectTeamApplication(HashMap<String, String> map, RowBounds rowBounds) {
+		return teamRepository.selectTeamApplication(sqlSession, map, rowBounds);
+	}
+	
+	@Override
+	public int selectTeamApplicationCount(HashMap<String, String> map) {
+		return teamRepository.selectTeamApplicationCount(sqlSession, map);
 	}
 
 

@@ -34,10 +34,13 @@ public class TeamRepository {
 		return sqlSession.insert("teamApplicationMapper.joinTeam", teamApp);
 	}
 
-	public List<TeamApplication> selectTeamApplication(SqlSessionTemplate sqlSession, int teamNo) {
-		return sqlSession.selectList("teamApplicationMapper.selectTeamApplication", teamNo);
+	public List<TeamApplication> selectTeamApplication(SqlSessionTemplate sqlSession,HashMap<String, String> map, RowBounds rowBounds) {
+		return sqlSession.selectList("teamApplicationMapper.selectTeamApplication", map, rowBounds);
 	}
 	
+	public int selectTeamApplicationCount(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("teamApplicationMapper.selectTeamApplicationCount", map);
+	}
 	//팀멤버 삽입
 	public int insertTeam(SqlSessionTemplate sqlSession, TeamMember teamMember) {
 		return sqlSession.insert("teamMemberMapper.insert",teamMember);
