@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="teamApplicationMapper">
+
+	<resultMap type="teamApplication" id="teamApplicationResultSet">
+		<result column="APPLY_NO" property="applyNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="TEAM_NO" property="teamNo" />
+		<result column="APPLY_CONTENT" property="applyContent" />
+		<result column="APPLY_DATE" property="applyDate" />
+		<result column="STATUS" property="status" />
+		<result column="NICKNAME" property="nickName" />
+		<result column="TEAM_NAME" property="teamName" />
+	</resultMap>
+	
+	
+	<select id="applyCheck" parameterType="teamApplication" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       TEAM_APPLICATION
+		 WHERE
+		       TEAM_NO = #{teamNo}
+		   AND
+		       MEMBER_NO = #{memberNo}
+		   AND 
+		       STATUS = 'Y'
+	</select>
+	
+	<insert id="joinTeam" parameterType="teamApplication">
+		INSERT INTO TEAM_APPLICATION
+		(APPLY_NO, MEMBER_NO, TEAM_NO, APPLY_CONTENT)
+		VALUES
+		(SEQ_TANO.NEXTVAL, #{ memberNo }, #{ teamNo }, #{ applyContent })
+	</insert>
+	
+	<select id="selectTeamApplication"  parameterType="hashmap" resultMap="teamApplicationResultSet">
+	SELECT TA.APPLY_NO,
+		TA.MEMBER_NO,
+		TA.TEAM_NO,
+		TA.APPLY_CONTENT,
+		TA.APPLY_DATE,
+		TA.STATUS,
+		 M.NICKNAME,
+		 T.TEAM_NAME
+	FROM TEAM_APPLICATION TA
+	JOIN MEMBER M ON TA.MEMBER_NO = M.MEMBER_NO
+	JOIN TEAM T ON TA.TEAM_NO = T.TEAM_NO
+	WHERE TA.TEAM_NO = #{teamNo}
+	</select>
+	
+	<select id="selectTeamApplicationCount" parameterType="hashmap" resultType="_int">
+	SELECT
+		COUNT(*)
+	FROM
+		TEAM_APPLICATION
+	WHERE
+		TEAM_NO = #{teamNo}
+	
+	</select>
+	
+	<update id="update" parameterType="teamApplication">
+		
+		update TEAM_APPLICATION
+        set STATUS =#{status}
+        where APPLY_NO= #{applyNo}
+	</update>
+	
+</mapper>

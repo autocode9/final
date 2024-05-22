@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="teamMemberMapper">
+
+	<resultMap type="teamMember" id="teamMemberResultSet">
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="TEAM_NO" property="teamNo" />
+		<result column="MEMBER_TYPE" property="memberType" />
+		<result column="ENROLL_DATE" property="enrollDate" />
+		<result column="LEAVE_DATE" property="leaveDate" />
+		<result column="STATUS" property="status" />
+		<result column="NICKNAME" property="nickName" />
+		
+	</resultMap>
+
+	<insert id="insert" parameterType="teamMember">
+		INSERT INTO TEAM_MEMBER
+		(MEMBER_NO, TEAM_NO ) VALUES (#{memberNo}, #{teamNo})
+	</insert>
+
+
+	<select id="selectTeamMemberList" resultMap="teamMemberResultSet">
+		SELECT 
+            M.NICKNAME,
+			TM.MEMBER_NO,
+			TM.TEAM_NO,
+			TM.MEMBER_TYPE,
+			TM.ENROLL_DATE,
+			TM.LEAVE_DATE,
+			TM.STATUS
+		FROM 
+			TEAM_MEMBER TM
+        JOIN MEMBER M ON  TM.MEMBER_NO=M.MEMBER_NO
+		WHERE 
+			TM.TEAM_NO=#{teamNo}
+	</select>
+</mapper>
