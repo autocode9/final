@@ -11,10 +11,13 @@ function getMatchApplications(boardLimit){
 			sentLimit : sentLimit
 		},
 		success : result => {
-			console.log(result);
+
 			const recievedList = result.data.recievedList;
 			const sentList = result.data.sentList;
-			console.log(sentList[0]);
+			
+			const recievedListCount = result.data.recievedListCount;
+			const sentListCount = result.data.sentListCount;
+
 			$('#recieved-area tbody').html('');
 			$('#sent-area tbody').html('');
 			
@@ -32,11 +35,11 @@ function getMatchApplications(boardLimit){
 			}
 			else{
 				for(let i in sentList){
-					const sentTr = createSentTr(result.sentList[i]);
+					const sentTr = createSentTr(sentList[i]);
 					$('#sent-area tbody').append(sentTr);
 				}
 			}
-			controllButtons();
+			controllButtons(result.data);
 			
 		}
 	});
@@ -127,7 +130,7 @@ function createSentTr(props){
 	return tr;
 }
 
-function controllButtons(){
+function controllButtons(data){
 	const moreRecievedBtn = document.createElement('button');
 	moreRecievedBtn.setAttribute('class', 'btn btn-primary more-recieved-btn');
 	moreRecievedBtn.innerText = '더보기';
@@ -144,7 +147,7 @@ function controllButtons(){
 	closeSentBtn.setAttribute('class', 'btn btn-secondary close-sent-btn');
 	closeSentBtn.innerText = '닫기';
 	
-	if(recievedList.length < 6){
+	if(data.recievedList.length < 6){
 		$('#recieved-btn-area').html('');
 		$('#recieved-btn-area').append(moreRecievedBtn);
 	}
@@ -155,7 +158,7 @@ function controllButtons(){
 		
 	}
 	
-	if(sentList.length < 6){
+	if(data.sentList.length < 6){
 		$('#sent-btn-area').html('');
 		$('#sent-btn-area').append(moreSentBtn);
 	}
