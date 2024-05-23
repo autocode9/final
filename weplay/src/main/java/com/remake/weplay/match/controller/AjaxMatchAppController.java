@@ -28,8 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class AjaxMatchAppController {
 	
 	private final MatchService matchService;
-
-	private final Gson gson;
 	
 	@GetMapping("/getMatchApplications")
 	public ResponseEntity<ResponseData> getMatchApplication(int teamNo, int recievedLimit, int sentLimit) {
@@ -58,8 +56,8 @@ public class AjaxMatchAppController {
 		int result = matchService.updateMatchApplication(matchApp);
 		String data;
 		
-		if(result > 0) data = "상태 업데이트 성공";
-		else data = "상태 업데이트 실패";
+		if(result > 0) data = "Y";
+		else data = "N";
 		
 		ResponseData rd = new ResponseData().builder().data(data).message("응답 성공").responseCode("00").build();
 		

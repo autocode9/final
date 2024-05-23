@@ -102,21 +102,26 @@
 			});
 			$('#recieved-area tbody').on('click', '.accept', e => {
 				const applyNo = $(e.target).parent().parent().find('.applyNo').val();
-				updateApplication(applyNo, 'A');
+				//if(confirm('경기 신청을 승낙하시겠습니까?')){
+					//updateApplication(applyNo, 'A');
+				//}
+				insertMatch($(e.target).parent().parent());
 			});
-			$('#recieved-area tbody').on('click', '.decline', () => {
+			$('#recieved-area tbody').on('click', '.decline', e => {
 				const applyNo = $(e.target).parent().parent().find('.applyNo').val();
-				updateApplication(applyNo, 'R');
+				if(confirm('경기 신청을 거절하시겠습니까?')){
+					updateApplication(applyNo, 'R');
+				}
 			});
-			$('#sent-area tbody').on('click', '.cancelApply', () => {
+			$('#sent-area tbody').on('click', '.cancelApply', e => {
 				const applyNo = $(e.target).parent().parent().find('.applyNo').val();
-				updateApplication(applyNo, 'N');
+				if(confirm('경기 신청을 취소하시겠습니까?')){
+					updateApplication(applyNo, 'N');
+				}
 			});
-			
 		});
 		
 		function updateApplication(applyNo, status){
-			console.log(applyNo + ' ' + status);
 			$.ajax({
 				url : 'matchApp/updateMatchApplication',
 				type : 'post',
@@ -125,20 +130,30 @@
 					status : status
 				},
 				success : result => {
+					if(result.data == 'Y'){
+						recievedLimit = 5;
+						sentLimit = 5;
+						getMatchApplications();
+					}
+				}
+			});
+		};
+	
+		function insertMatch(match){
+			$.ajax({
+				url : 'match/insertMatch',
+				type : 'post',
+				data : {
+					fieldNo : $(match).find('.fieldNo').val(),
+					homeTeam : $(match).find('.homeTeamNo').val(),
+					awayTeam : $('#teamNo').val(),
+					matchDate : $(match).children().eq(2).text(),
+					matchTime : $(match).children().eq(3).text()
+				},
+				success : result => {
 					console.log(result);
 				}
-				
 			});
-		}
-		
-		function acceptMatch(){
-			
-		}
-		function declineMatch(){
-			
-		}
-		function cancelApply(){
-			
 		}
 	</script>
 	

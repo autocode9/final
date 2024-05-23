@@ -31,6 +31,7 @@
 		<mapper resource="/mapper/teamBoard-mapper.xml" />
 		<mapper resource="/mapper/field-mapper.xml" />
 		<mapper resource="/mapper/match-mapper.xml" />
+		<mapper resource="/mapper/matchApplication-mapper.xml" />
 		<mapper resource="/mapper/teamMember-mapper.xml" />
 	</mappers>
 	
