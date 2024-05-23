@@ -52,6 +52,9 @@
 	width: 90%;
 	height: 30px;
 }
+#myInput{
+	width:200px;
+}
 </style>
 </head>
 <body>
@@ -72,7 +75,7 @@
 								onclick="insertTeamBoardBrg();" class="btn btn-sm btn-primary">등록</button></td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="myTable">
 					<c:choose>
 						<c:when test="${empty list }">
 							<tr>
@@ -94,9 +97,8 @@
 			</table>
 
 
-			<div></div>
+			<div><input class="form-control" id="myInput" type="text" placeholder="검색"></div>
              <button class="btn btn-sm btn-primary" onclick="teamManage()">팀 관리</button>
-			<button class="btn btn-sm btn-danger">팀 삭제</button>
 		</div>
 
 		<!-- 브릿지 ajax 스크립트 -->
@@ -140,6 +142,15 @@
 		</div>
 	</div>
 	<script>
+	
+	$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
     // 삭제 브릿지테이블
     function delTeamBoardBrg(element) {
         var boardCode = $(element).closest('tr').find('.boardCode').text();

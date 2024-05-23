@@ -206,13 +206,13 @@ max-height: 300px;
 			
 			
 		<div class="tab-pane container fade" id="menu2">
-		        <button onclick="del();" align="center">팀 삭제하시겠습니까?</button>
+	        <button onclick="if(confirm('정말로 삭제하시겠습니까?')) { del(); }" align="center" class="btn btn-sm btn-danger">팀 삭제</button>
+
 		</div>
 
 
 	</div>
 	<script>
-	
 	function del(){
 		var teamNo = getParameterByName('teamNo');
 		$.ajax({
