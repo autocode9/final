@@ -12,14 +12,5 @@
 		<property name="password" value="WEPLAY" />
 	</bean>
 		
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
-		<property name="configLocation" value="classpath:mybatis-config.xml"/>
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
-		<constructor-arg ref="sqlSessionFactory" />
-	</bean>
-	
 	<bean class="com.google.gson.Gson" id="gson"/>
 </beans>

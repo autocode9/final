@@ -6,17 +6,23 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.remake.weplay.teamBoardBrg.model.dao.TeamBoardBrgRepository;
+import com.remake.weplay.teamBoardBrg.model.dao.TeamBoardBrgMapper;
 import com.remake.weplay.teamBoardBrg.model.vo.TeamBoardBrg;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class TeamBoardBrgServiceImpl implements TeamBoardBrgService {
 
-	@Autowired
-	private TeamBoardBrgRepository teamBoardBrgRepository;
+	private final TeamBoardBrgMapper teamBoardBrgMapper;
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
+//
+//	@Autowired
+//	private TeamBoardBrgRepository teamBoardBrgRepository;
+//	
+//	@Autowired
+//	private SqlSessionTemplate sqlSession;
 	
 	
 	/***
@@ -24,7 +30,8 @@ public class TeamBoardBrgServiceImpl implements TeamBoardBrgService {
 	 */
 	@Override
 	public List<TeamBoardBrg> selectList(int teamNo) {
-		return teamBoardBrgRepository.selectList(sqlSession, teamNo);
+//		return teamBoardBrgRepository.selectList(sqlSession, teamNo);
+		return teamBoardBrgMapper.selectList(teamNo);
 	}
 
 
@@ -33,7 +40,8 @@ public class TeamBoardBrgServiceImpl implements TeamBoardBrgService {
 	 */
 	@Override
 	public int deleteTeamBoardBrg(int boardCode) {
-		return teamBoardBrgRepository.deleteTeamBoardBrg(sqlSession,boardCode);
+//		return teamBoardBrgRepository.deleteTeamBoardBrg(sqlSession,boardCode);
+		return teamBoardBrgMapper.deleteTeamBoardBrg(boardCode);
 	}
 
 	/***
@@ -41,7 +49,8 @@ public class TeamBoardBrgServiceImpl implements TeamBoardBrgService {
 	 */
 	@Override
 	public int insertTeamBoardBrg(TeamBoardBrg teamBoardBrg) {
-		return teamBoardBrgRepository.insertTeamBoardBrg(sqlSession, teamBoardBrg);
+//		return teamBoardBrgRepository.insertTeamBoardBrg(sqlSession, teamBoardBrg);
+		return teamBoardBrgMapper.insertTeamBoardBrg(teamBoardBrg);
 	}
 
 	

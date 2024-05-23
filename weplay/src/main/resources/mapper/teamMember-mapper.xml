@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="teamMemberMapper">
+<mapper namespace="com.remake.weplay.teamBoard.model.dao.TeamBoardMapper">
 
 	<resultMap type="teamMember" id="teamMemberResultSet">
 		<result column="MEMBER_NO" property="memberNo" />
@@ -12,10 +12,9 @@
 		<result column="LEAVE_DATE" property="leaveDate" />
 		<result column="STATUS" property="status" />
 		<result column="NICKNAME" property="nickName" />
-		
 	</resultMap>
 
-	<insert id="insert" parameterType="teamMember">
+	<insert id="insertTeam" parameterType="teamMember">
 		INSERT INTO TEAM_MEMBER
 		(MEMBER_NO, TEAM_NO ) VALUES (#{memberNo}, #{teamNo})
 	</insert>

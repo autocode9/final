@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.remake.weplay.teamBoardBrg.model.service.TeamBoardBrgService;
 import com.remake.weplay.teamBoardBrg.model.vo.TeamBoardBrg;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class TeamBoardBrgController {
 
-	@Autowired
-	private TeamBoardBrgService teamBoardBrgService;
+	private final TeamBoardBrgService teamBoardBrgService;
 
 	/***
 	 * 팀브릿지 전체조회
@@ -25,7 +27,6 @@ public class TeamBoardBrgController {
 	 */
 	@RequestMapping("teamBoard.teamBoard")
 	public String selectList(@RequestParam(value="teamNo")int teamNo,Model model) {
-		// /WEB-INF/views/member/myPage.jsp
 		model.addAttribute("list", teamBoardBrgService.selectList(teamNo));
 		
 		return "teamBoard/teamBoard";

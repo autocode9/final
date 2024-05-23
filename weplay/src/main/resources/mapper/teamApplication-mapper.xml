@@ -61,11 +61,15 @@
 	
 	</select>
 	
-	<update id="update" parameterType="teamApplication">
+	<update id="updateTeamApp" parameterType="teamApplication">
 		
 		update TEAM_APPLICATION
         set STATUS =#{status}
         where APPLY_NO= #{applyNo}
 	</update>
 	
+	<insert id="insertTeam" parameterType="teamMember">
+		INSERT INTO TEAM_MEMBER
+		(MEMBER_NO, TEAM_NO ) VALUES (#{memberNo}, #{teamNo})
+	</insert>
 </mapper>
