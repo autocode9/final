@@ -31,6 +31,20 @@ public class MatchServiceImpl implements MatchService {
 		return matchMapper.getSentApplications(teamNo, rowBounds);
 	}
 
+	@Override
+	public int recievedListCount(int teamNo) {
+		return matchMapper.recievedListCount(teamNo);
+	}
+	
+	@Override
+	public int sentListCount(int teamNo) {
+		return matchMapper.sentListCount(teamNo);
+	}
+
+	@Override
+	public int updateMatchApplication(MatchApplication matchApp) {
+		return matchMapper.updateMatchApplication(matchApp);
+	}
 
 
 }

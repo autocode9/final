@@ -13,5 +13,11 @@ public interface MatchService {
 	List<MatchApplication> getRecievedApplications(int teamNo, RowBounds rowBounds);
 
 	List<MatchApplication> getSentApplications(int teamNo, RowBounds rowBounds);
+	
+	int recievedListCount(int teamNo);
+	
+	int sentListCount(int teamNo);
+
+	int updateMatchApplication(MatchApplication matchApp);
 
 }

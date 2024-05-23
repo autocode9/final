@@ -15,6 +15,11 @@ public interface MatchMapper {
 	public List<MatchApplication> getRecievedApplications(int teamNo, RowBounds rowBounds);
 	
 	public List<MatchApplication> getSentApplications(int teamNo, RowBounds rowBounds);
+
+	public int recievedListCount(int teamNo);
+
+	public int sentListCount(int teamNo);
 	
+	public int updateMatchApplication(MatchApplication matchApp);
 	
 }

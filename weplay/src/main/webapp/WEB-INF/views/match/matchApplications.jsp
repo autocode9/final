@@ -118,6 +118,15 @@
 		function updateApplication(applyNo, status){
 			console.log(applyNo + ' ' + status);
 			$.ajax({
+				url : 'matchApp/updateMatchApplication',
+				type : 'post',
+				data : {
+					applyNo : applyNo,
+					status : status
+				},
+				success : result => {
+					console.log(result);
+				}
 				
 			});
 		}

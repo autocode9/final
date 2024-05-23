@@ -12,9 +12,9 @@ function getMatchApplications(boardLimit){
 		},
 		success : result => {
 			console.log(result);
-			const recievedList = result.recievedList;
-			const sentList = result.sentList;
-			
+			const recievedList = result.data.recievedList;
+			const sentList = result.data.sentList;
+			console.log(sentList[0]);
 			$('#recieved-area tbody').html('');
 			$('#sent-area tbody').html('');
 			

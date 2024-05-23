@@ -104,5 +104,33 @@
 		       END, 
 		       APPLY_DATE DESC
 	</select>
-
+	
+	<select id="recievedListCount" parameterType="_int" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM 
+		       MATCH_APPLICATION
+		 WHERE
+		       AWAY_TEAM = #{teamNo}
+		   AND
+		       STATUS = 'Y'
+	</select>
+	
+	<select id="sentListCount" parameterType="_int" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM 
+		       MATCH_APPLICATION
+		 WHERE
+		       HOME_TEAM = #{teamNo}
+	</select>
+	
+	<update id="updateMatchApplication" parameterType="matchApplication">
+		UPDATE
+		       MATCH_APPLICATION
+		   SET
+		       STATUS = #{status}
+		 WHERE
+		       APPLY_NO = #{applyNo}
+	</update>
 </mapper>
