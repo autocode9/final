@@ -31,4 +31,6 @@ public interface TeamMapper {
 	public int insertTeam(TeamMember teamMember);
 	//팀신청자 업데이트
 	public int updateTeamApp(TeamApplication teamApp);
+	
+	int deleteTeam(int teamNo);
 }

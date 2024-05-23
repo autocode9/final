@@ -52,6 +52,10 @@
 	width: 90%;
 	height: 30px;
 }
+.scroll{
+overflow-y: auto;
+max-height: 300px; 
+}
  #pagingArea {width:fit-content; margin:auto;}
 </style>
 </head>
@@ -167,6 +171,7 @@
 			
 			<div class="tab-pane container fade" id="menu1">
 				<h3>현재 팀 인원</h3>
+				<div class="scroll">
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -196,16 +201,40 @@
 						</c:choose>
 					</tbody>
 				</table>
+				</div>
 			</div>
 			
 			
-			<div class="tab-pane container fade" id="menu2">
-			<button align="center";>팀 삭제하시겠습니까?</button>
-			</div>
+		<div class="tab-pane container fade" id="menu2">
+	        <button onclick="if(confirm('정말로 삭제하시겠습니까?')) { del(); }" align="center" class="btn btn-sm btn-danger">팀 삭제</button>
+
 		</div>
+
 
 	</div>
 	<script>
+	function del(){
+		var teamNo = getParameterByName('teamNo');
+		$.ajax({
+			type : "post",
+			url : 'delete.team',
+			data : {
+				teamNo : teamNo
+			},
+			success:function(response){
+				   if (response) {
+                       alert(" 성공!");
+                   } else {
+                       alert(" 실패");
+                   }
+               },
+               error: function(xhr, status, error) {
+                   console.error("AJAX 오류 발생:", error);
+                   alert("실패했습니다.");
+               }
+			
+			});
+		}
 	
 		// 파라미터 받아와서 teamNo 넣기
 	    function getParameterByName(name) {

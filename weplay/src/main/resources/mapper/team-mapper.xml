@@ -110,7 +110,11 @@
 		       STATUS = 'Y'
 	</select>
 	
-	
+	<update id="deleteTeam" parameterType="_int" >
+		UPDATE TEAM
+		SET STATUS='N'
+		WHERE TEAM_NO=#{teamNo}
+	</update>
 
 	
 </mapper>

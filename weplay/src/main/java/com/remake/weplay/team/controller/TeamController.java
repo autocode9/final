@@ -1,7 +1,11 @@
 package com.remake.weplay.team.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.remake.weplay.team.model.service.TeamService;
@@ -30,14 +34,11 @@ public class TeamController {
 		}
 		return mv;
 	}
-//
-//	@RequestMapping("delete.team")
-//	public String delete(int teamNo, Model model) {
-//		if (teamService.deleteTeam(teamNo) > 0) {
-//			 model.addAttribute("message", "팀이 성공적으로 삭제되었습니다.");
-//		} else {
-//	        model.addAttribute("message", "팀 삭제에 실패했습니다.");
-//		}
-//	}
+	@ResponseBody
+	@PostMapping("delete.team")
+	public String delete(int teamNo, Model model) {
+		
+		return teamService.deleteTeam(teamNo) > 0 ? "success" : "fail";
+	}
 
 }

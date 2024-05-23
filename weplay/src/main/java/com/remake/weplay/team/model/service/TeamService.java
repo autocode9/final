@@ -30,5 +30,7 @@ public interface TeamService {
 	List<TeamApplication> selectTeamApplication(HashMap<String, String> map, RowBounds rowBounds);
 	//팀신청 카운트
 	int selectTeamApplicationCount(HashMap<String, String> map);
+	
+	int deleteTeam(int teamNo);
 
 }

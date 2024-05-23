@@ -67,6 +67,11 @@ public class TeamServiceImpl implements TeamService {
 		return teamMapper.selectTeamApplicationCount(map);
 	}
 
+	@Override
+	public int deleteTeam(int teamNo) {
+		return teamMapper.deleteTeam(teamNo);
+	}
+
 
 
 }
