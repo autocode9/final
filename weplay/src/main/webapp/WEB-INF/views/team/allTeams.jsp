@@ -64,7 +64,7 @@
 	
 	<jsp:include page="../common/header.jsp"/>
 	
-	<script src="resources/js/team/teamList.js"></script>
+	<script src="resources/js/team/allTeams.js"></script>
 	<script src="resources/js/common/city-district-select.js"></script>
 
     <div id="outer">

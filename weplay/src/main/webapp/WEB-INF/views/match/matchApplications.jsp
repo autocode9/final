@@ -48,8 +48,8 @@
                     
                 </tbody>
             </table>
-            <div class="more-btn-area">
-                <button class="btn btn-primary more-recieved-btn">더보기</button>
+            <div id="recieved-btn-area">
+
             </div>
         </div>
         <div id="sent-area">
@@ -71,8 +71,8 @@
                     
                 </tbody>
             </table>
-            <div class="more-btn-area">
-                <button class="btn btn-primary more-sent-btn">더보기</button>
+            <div id="sent-btn-area">
+            
             </div>
         </div>
     </div>
@@ -82,14 +82,20 @@
 		var sentLimit = 5;
 		$(() => {
 			getMatchApplications();
-			$('.more-recieved-btn').click(()=>{
+			$('#recieved-btn-area')on('click', '.more-recieved-btn', ()=>{
 				recievedLimit += 5;
 				getMatchApplications();
 			})
-			$('.more-sent-btn').click(()=>{
+			$('#sent-btn-area').on('click', '.more-sent-btn', ()=>{
 				sentLimit += 5;
 				getMatchApplications();
-			})
+			});
+			$('#recieved-area tbody').on('click', '.accept', () => {
+				
+			});
+			$('#recieved-area tbody').on('click', '.decline', () => {
+				
+			});
 		});
 		function getMatchApplications(boardLimit){
 			$.ajax({
@@ -126,19 +132,48 @@
 							$('#sent-area tbody').append(sentTr);
 						}
 					}
-					/*
-					if(recievedLimit > 5 && recievedLimit < 11){
-						const button = document.createElement('button');
-						button.setAttribute('class', 'btn btn-secondary close-recieved-btn');
-						button.innerText = '닫기';
-
+					controllButtons();
+					
+					
+					
+					const moreRecievedBtn = document.createElement('button');
+					moreRecievedBtn.setAttribute('class', 'btn btn-primary more-recieved-btn');
+					moreRecievedBtn.innerText = '더보기';
+					
+					const moreSentBtn = document.createElement('button');
+					moreSentBtn.setAttribute('class', 'btn btn-primary more-sent-btn');
+					moreSentBtn.innerText = '더보기';
+					
+					const closeRecievedBtn = document.createElement('button');
+					closeRecievedBtn.setAttribute('class', 'btn btn-secondary close-recieved-btn');
+					closeRecievedBtn.innerText = '닫기';
+					
+					const closeSentBtn = document.createElement('button');
+					closeSentBtn.setAttribute('class', 'btn btn-secondary close-sent-btn');
+					closeSentBtn.innerText = '닫기';
+					
+					if(recievedList.length < 5){
+						$('#recieved-btn-area').html('');
+						$('#recieved-btn-area').appendChild(moreRecievedBtn);
 					}
-					if(sentLimit > 5 && recievedLimit < 11){
-						const button = document.createElement('button');
-						button.setAttribute('class', 'btn btn-secondary close-sent-btn');
-						button.innerText = '닫기';
+					else{
+						$('#recieved-btn-area').html('');
+						$('#recieved-btn-area').appendChild(moreRecievedBtn);
+						$('#recieved-btn-area').appendChild(closeRecievedBtn);
+						
 					}
-					*/
+					
+					if(sentList.length < 5){
+						$('#recieved-btn-area').html('');
+						$('#sent-btn-area').appendChild(moreSentBtn);
+					}
+					else{
+						$('#recieved-btn-area').html('');
+						$('#sent-btn-area').appendChild(moreSentBtn);
+						$('#sent-btn-area').appendChild(closeSentBtn);
+					}
+					
+					
 				}
 			});
 		};
@@ -228,6 +263,9 @@
 			return tr;
 		}
 		
+		function controllButtons(){
+			
+		}
 	</script>
 	
 	
