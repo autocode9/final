@@ -14,15 +14,18 @@ import com.google.gson.Gson;
 import com.remake.weplay.commons.template.Pagination;
 import com.remake.weplay.match.model.service.MatchService;
 import com.remake.weplay.match.model.vo.MatchApplication;
+import com.remake.weplay.team.model.service.TeamService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value="matchApp", produces="application/json; charset=UTF-8")
+@RequiredArgsConstructor
 public class AjaxMatchAppController {
 	
-	@Autowired
-	private MatchService matchService;
-	@Autowired
-	private Gson gson;
+	private final MatchService matchService;
+
+	private final Gson gson;
 	
 	@GetMapping("/getMatchApplications")
 	public String getMatchApplication(int teamNo, int recievedLimit, int sentLimit) {

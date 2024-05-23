@@ -3,7 +3,6 @@ package com.remake.weplay.team.controller;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +13,15 @@ import com.remake.weplay.commons.template.Pagination;
 import com.remake.weplay.team.model.service.TeamService;
 import com.remake.weplay.teamBoard.model.service.TeamBoardService;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class ApproveTeamController {
 
-	@Autowired
-	private TeamService teamService;
-	
-	@Autowired
-	private TeamBoardService teamBoardService;
+	private final TeamService teamService;
+
+	private final TeamBoardService teamBoardService;
 	
 	/**
 	 * 신청리스트

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="teamApplicationMapper">
+<mapper namespace="com.remake.weplay.team.model.dao.TeamMapper">
 
 	<resultMap type="teamApplication" id="teamApplicationResultSet">
 		<result column="APPLY_NO" property="applyNo" />

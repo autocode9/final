@@ -4,29 +4,27 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.remake.weplay.field.model.dao.FieldRepository;
+import com.remake.weplay.field.model.dao.FieldMapper;
 import com.remake.weplay.field.model.vo.Field;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class FieldServiceImpl implements FieldService {
 	
-	@Autowired
-	private FieldRepository fieldRepository;
-	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private final FieldMapper fieldMapper;
 	
 	@Override
 	public int countFields(HashMap<String, String> map) {
-		return fieldRepository.countFields(sqlSession, map);
+		return fieldMapper.countFields(map);
 	}
 	
 	@Override
 	public List<Field> selectFields(HashMap<String, String> map, RowBounds rowBounds) {
-		return fieldRepository.selectFields(sqlSession, map, rowBounds);
+		return fieldMapper.selectFields(map, rowBounds);
 	}
 	
 

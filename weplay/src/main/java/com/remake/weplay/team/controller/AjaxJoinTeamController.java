@@ -1,6 +1,5 @@
 package com.remake.weplay.team.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,14 +8,16 @@ import com.google.gson.Gson;
 import com.remake.weplay.team.model.service.TeamService;
 import com.remake.weplay.team.model.vo.TeamApplication;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(value="joinTeam", produces="application/json; charset=UTF-8")
+@RequiredArgsConstructor
 public class AjaxJoinTeamController {
 	
-	@Autowired
-	private TeamService teamService;
-	@Autowired
-	private Gson gson;
+	private final TeamService teamService;
+
+	private final Gson gson;
 	
 	@PostMapping
 	public String joinTeam(TeamApplication teamApp) {

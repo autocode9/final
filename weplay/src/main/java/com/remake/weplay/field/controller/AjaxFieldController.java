@@ -3,7 +3,6 @@ package com.remake.weplay.field.controller;
 import java.util.HashMap;
 
 import org.json.simple.JSONArray;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +14,16 @@ import com.remake.weplay.commons.model.vo.PageInfo;
 import com.remake.weplay.commons.template.Pagination;
 import com.remake.weplay.field.model.service.FieldService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(value="fields", produces="application/json; charset=UTF-8")
+@RequiredArgsConstructor
 public class AjaxFieldController {
+
+	private final FieldService fieldService;
 	
-	@Autowired
-	private FieldService fieldService;
-	@Autowired
-	private Gson gson;
+	private final Gson gson;
 	
 	@GetMapping("/{page}")
 	public String selectFields(String category, @RequestParam(value="query", defaultValue="all") String query, @PathVariable("page") int currentPage) {

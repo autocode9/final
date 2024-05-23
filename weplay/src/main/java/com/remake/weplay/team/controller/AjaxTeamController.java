@@ -19,14 +19,16 @@ import com.remake.weplay.commons.model.vo.PageInfo;
 import com.remake.weplay.commons.template.Pagination;
 import com.remake.weplay.team.model.service.TeamService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping(value="teams", produces="application/json; charset=UTF-8")
+@RequiredArgsConstructor
 public class AjaxTeamController {
-	
-	@Autowired
-	private TeamService teamService;
-	@Autowired
-	private Gson gson;
+
+	private final TeamService teamService;
+
+	private final Gson gson;
 	
 	@GetMapping("/{page}")
 	public String selectTeams(City city, @RequestParam(value="keyword", defaultValue="all") String keyword,@PathVariable("page") int currentPage) {

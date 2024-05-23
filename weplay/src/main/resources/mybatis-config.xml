@@ -33,4 +33,5 @@
 		<mapper resource="/mapper/match-mapper.xml" />
 		<mapper resource="/mapper/teamMember-mapper.xml" />
 	</mappers>
+	
 </configuration>
