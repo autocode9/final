@@ -49,7 +49,7 @@
                 </tbody>
             </table>
             <div class="more-btn-area">
-                <button class="btn btn-primary">더보기</button>
+                <button class="btn btn-primary more-recieved-btn">더보기</button>
             </div>
         </div>
         <div id="sent-area">
@@ -68,29 +68,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="6">보낸 신청 내역이 없습니다.</td>
-                    </tr>
-                    <tr>
-                        <td>
-                        	<input type="hidden" class="applyNo">
-                        	<a href="">리메이크 FC</a>
-                        </td>
-                        <td><a href="">효창공원운동장</a></td>
-                        <td>2024.06.08<br>16:00</td>
-                        <td>90분</td>
-                        <td><a href="">사용자2 | 이소룡</a><br>010-0000-0000</td>
-                        <td>경기합시다.</td>
-                        <td>2024.05.20</td>
-                        <td>
-                            <label class="status-y">신청중</label>
-                            <button class="btn btn-sm btn-outline-danger">신청 취소</button>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
             <div class="more-btn-area">
-                <button class="btn btn-primary">더보기</button>
+                <button class="btn btn-primary more-sent-btn">더보기</button>
             </div>
         </div>
     </div>
@@ -100,6 +82,14 @@
 		var sentLimit = 5;
 		$(() => {
 			getMatchApplications();
+			$('.more-recieved-btn').click(()=>{
+				recievedLimit += 5;
+				getMatchApplications();
+			})
+			$('.more-sent-btn').click(()=>{
+				sentLimit += 5;
+				getMatchApplications();
+			})
 		});
 		function getMatchApplications(boardLimit){
 			$.ajax({
@@ -114,6 +104,9 @@
 					console.log(result);
 					const recievedList = result.recievedList;
 					const sentList = result.sentList;
+					
+					$('#recieved-area tbody').html('');
+					$('#sent-area tbody').html('');
 					
 					if(recievedList.length == 0){
 						$('#recieved-area tbody').html('<tr><td colspan="6">받은 신청 내역이 없습니다.</td></tr>');
@@ -133,7 +126,19 @@
 							$('#sent-area tbody').append(sentTr);
 						}
 					}
+					/*
+					if(recievedLimit > 5 && recievedLimit < 11){
+						const button = document.createElement('button');
+						button.setAttribute('class', 'btn btn-secondary close-recieved-btn');
+						button.innerText = '닫기';
 
+					}
+					if(sentLimit > 5 && recievedLimit < 11){
+						const button = document.createElement('button');
+						button.setAttribute('class', 'btn btn-secondary close-sent-btn');
+						button.innerText = '닫기';
+					}
+					*/
 				}
 			});
 		};
@@ -176,24 +181,7 @@
 		}
 		
 		function createSentTr(props){
-			/*
-			<tr>
-            <td>
-            	<input type="hidden" class="applyNo">
-            	<a href="">리메이크 FC</a>
-            </td>
-            <td><a href="">효창공원운동장</a></td>
-            <td>2024.06.08<br>16:00</td>
-            <td>90분</td>
-            <td><a href="">사용자2 | 이소룡</a><br>010-0000-0000</td>
-            <td>경기합시다.</td>
-            <td>2024.05.20</td>
-            <td>
-                <label class="status-y">신청중</label>
-                <button class="btn btn-sm btn-outline-danger">신청 취소</button>
-            </td>
-        	</tr>
-        	*/
+
 			const tr = document.createElement('tr');
 			
 			const tds = [];
@@ -217,17 +205,29 @@
 			tds[5].innerHTML = props.applyContent;
 
 			tds[6].innerHTML = props.applyDate;
-
-			tds[7].innerHTML = '<button class="btn btn-sm btn-success accept">승낙</button>'
-            			  	 + '<button class="btn btn-sm btn-danger decline">거절</button>';
+			
+			const status = props.status.toLowerCase();
+			let statusStr = '';
+			switch(status){
+			case 'y' : statusStr = '신청중'; break;
+			case 'n' : statusStr = '신청 취소'; break;
+			case 'a' : statusStr = '승낙'; break;
+			case 'r' : statusStr = '거절'; break;
+			}
+			
+			tds[7].innerHTML = '<label class="status-' + status + '">' + statusStr + '</label>';
+			
+			if(status == 'y'){
+				tds[7].innerHTML += '<button class="btn btn-sm btn-outline-danger cancelApply">신청 취소</button>';
+			}
 			
 			for(let i in tds){
 				tr.appendChild(tds[i]);
 			}
 			
 			return tr;
-        
 		}
+		
 	</script>
 	
 	

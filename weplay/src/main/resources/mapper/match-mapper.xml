@@ -68,6 +68,9 @@
 		       AWAY_TEAM = #{teamNo}
 		   AND
 		       MA.STATUS = 'Y'
+		 ORDER
+		    BY
+		       MA.APPLY_DATE DESC
 	</select>
 	
 	<select id="getSentApplications" parameterType="_int" resultMap="matchAppResultMap">
@@ -93,6 +96,13 @@
 		       TEAM ON(TEAM.TEAM_NO = AWAY_TEAM)
 		 WHERE
 		       HOME_TEAM = #{teamNo}
+		 ORDER
+		    BY 
+		       CASE WHEN MA.STATUS = 'Y' THEN 1 
+		            WHEN MA.STATUS IN ('A', 'R') THEN 2
+		            ELSE 3
+		       END, 
+		       APPLY_DATE DESC
 	</select>
 
 </mapper>
