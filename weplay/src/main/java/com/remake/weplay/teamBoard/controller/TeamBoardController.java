@@ -17,14 +17,15 @@ import com.remake.weplay.teamBoard.model.service.TeamBoardService;
 import com.remake.weplay.teamBoard.model.vo.TeamBoard;
 import com.remake.weplay.teamBoardBrg.model.service.TeamBoardBrgService;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@Slf4j
+@RequiredArgsConstructor
 public class TeamBoardController {
 
-	@Autowired
-	private TeamBoardService teamBoardService; 
+	
+	private final TeamBoardService teamBoardService; 
 	
 	
 	@ResponseBody

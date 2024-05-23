@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="teamBoardBrgMapper">
+<mapper namespace="com.remake.weplay.teamBoardBrg.model.dao.TeamBoardBrgMapper">
 	<resultMap type="teamBoardBrg" id="teamBoardBrgResultSet">
 		<result column="BOARD_CODE" property="boardCode" />
 		<result column="TEAM_NO" property="teamNo" />
