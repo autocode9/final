@@ -2,7 +2,6 @@ package com.remake.weplay.city.model.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.remake.weplay.city.model.dao.CityMapper;
@@ -14,8 +13,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
 	
-	@Autowired
-	private CityMapper cityMapper;
+
+	private final CityMapper cityMapper;
 	
 	// 시/도 목록 조회
 	@Override
