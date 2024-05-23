@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.remake.weplay.match.model.dao.MatchMapper;
+import com.remake.weplay.match.model.vo.Match;
 import com.remake.weplay.match.model.vo.MatchApplication;
 
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,11 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public int updateMatchApplication(MatchApplication matchApp) {
 		return matchMapper.updateMatchApplication(matchApp);
+	}
+
+	@Override
+	public int insertMatch(Match match) {
+		return matchMapper.insertMatch(match);
 	}
 
 

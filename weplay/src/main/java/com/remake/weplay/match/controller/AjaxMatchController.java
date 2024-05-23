@@ -1,5 +1,10 @@
 package com.remake.weplay.match.controller;
 
+import java.nio.charset.Charset;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +26,17 @@ public class AjaxMatchController {
 	@PostMapping("/insertMatch")
 	public ResponseEntity<ResponseData> insertMatch(Match match) {
 		
-		return null;
+		int result = matchService.insertMatch(match);
+		String data;
+		
+		if(result > 0) data = "Y";
+		else data = "N";
+		
+		ResponseData rd = new ResponseData().builder().data(data).message("응답 성공").responseCode("00").build();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	}
 }

@@ -68,6 +68,8 @@
 		       AWAY_TEAM = #{teamNo}
 		   AND
 		       MA.STATUS = 'Y'
+		   AND
+		       MATCH_DATE > SYSDATE
 		 ORDER
 		    BY
 		       MA.APPLY_DATE DESC
@@ -96,6 +98,8 @@
 		       TEAM ON(TEAM.TEAM_NO = AWAY_TEAM)
 		 WHERE
 		       HOME_TEAM = #{teamNo}
+		   AND
+		       MATCH_DATE > SYSDATE
 		 ORDER
 		    BY 
 		       CASE WHEN MA.STATUS = 'Y' THEN 1 

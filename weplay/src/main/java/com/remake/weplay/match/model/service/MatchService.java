@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 
+import com.remake.weplay.match.model.vo.Match;
 import com.remake.weplay.match.model.vo.MatchApplication;
 
 public interface MatchService {
@@ -19,5 +20,7 @@ public interface MatchService {
 	int sentListCount(int teamNo);
 
 	int updateMatchApplication(MatchApplication matchApp);
+
+	int insertMatch(Match match);
 
 }

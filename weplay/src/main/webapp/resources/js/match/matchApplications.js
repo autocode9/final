@@ -1,6 +1,48 @@
 /**
  * 
  */
+ 
+var recievedLimit = 5;
+var sentLimit = 5;
+
+$(() => {
+	getMatchApplications();
+	$('#recieved-btn-area').on('click', '.more-recieved-btn', ()=>{
+		recievedLimit += 5;
+		getMatchApplications();
+	})
+	$('#sent-btn-area').on('click', '.more-sent-btn', ()=>{
+		sentLimit += 5;
+		getMatchApplications();
+	});
+	$('#recieved-btn-area').on('click', '.close-recieved-btn', ()=>{
+		recievedLimit -= 5;
+		getMatchApplications();
+	})
+	$('#sent-btn-area').on('click', '.close-sent-btn', ()=>{
+		sentLimit -= 5;
+		getMatchApplications();
+	});
+	$('#recieved-area tbody').on('click', '.accept', e => {
+		const applyNo = $(e.target).parent().parent().find('.applyNo').val();
+		if(confirm('경기 신청을 승낙하시겠습니까?')){
+			updateApplication(applyNo, 'A');
+		}
+		insertMatch($(e.target).parent().parent());
+	});
+	$('#recieved-area tbody').on('click', '.decline', e => {
+		const applyNo = $(e.target).parent().parent().find('.applyNo').val();
+		if(confirm('경기 신청을 거절하시겠습니까?')){
+			updateApplication(applyNo, 'R');
+		}
+	});
+	$('#sent-area tbody').on('click', '.cancelApply', e => {
+		const applyNo = $(e.target).parent().parent().find('.applyNo').val();
+		if(confirm('경기 신청을 취소하시겠습니까?')){
+			updateApplication(applyNo, 'N');
+		}
+	});
+});
 function getMatchApplications(boardLimit){
 	$.ajax({
 		url : 'matchApp/getMatchApplications',
@@ -167,4 +209,49 @@ function controllButtons(data){
 		$('#sent-btn-area').append(moreSentBtn);
 		$('#sent-btn-area').append(closeSentBtn);
 	}
+}
+
+function updateApplication(applyNo, status){
+	$.ajax({
+		url : 'matchApp/updateMatchApplication',
+		type : 'post',
+		data : {
+			applyNo : applyNo,
+			status : status
+		},
+		success : result => {
+			if(result.data == 'Y'){
+				recievedLimit = 5;
+				sentLimit = 5;
+				getMatchApplications();
+			}
+		}
+	});
+};
+	
+function insertMatch(match){
+	$matchTime = $(match).children().eq(3).text();
+	
+	$.ajax({
+		url : 'match/insertMatch',
+		type : 'post',
+		data : {
+			fieldNo : $(match).find('.fieldNo').val(),
+			homeTeam : $(match).find('.homeTeamNo').val(),
+			awayTeam : $('#teamNo').val(),
+			matchDate : $(match).children().eq(2).text(),
+			matchTime : $matchTime.substring(0, $matchTime.indexOf('분'))
+		},
+		success : result => {
+			if(result.data == 'Y'){
+				alert('경기가 확정되었습니다.')
+				recievedLimit = 5;
+				sentLimit = 5;
+				getMatchApplications();
+			}
+			else{
+				alert('경기 확정 실패.. 다시 시도해주세요');
+			}
+		}
+	});
 }

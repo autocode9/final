@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.remake.weplay.match.model.vo.Match;
 import com.remake.weplay.match.model.vo.MatchApplication;
 
 @Mapper
@@ -21,5 +22,7 @@ public interface MatchMapper {
 	public int sentListCount(int teamNo);
 	
 	public int updateMatchApplication(MatchApplication matchApp);
+
+	public int insertMatch(Match match);
 	
 }
