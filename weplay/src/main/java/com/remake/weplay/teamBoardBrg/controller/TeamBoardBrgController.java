@@ -32,6 +32,9 @@ public class TeamBoardBrgController {
 		return "teamBoard/teamBoard";
 	}
 	
+	
+	
+	
 	/**
 	 * 팀보드브릿지 삽입
 	 * @param teamBoardBrg

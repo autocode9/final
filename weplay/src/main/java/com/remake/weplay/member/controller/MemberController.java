@@ -4,11 +4,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.remake.weplay.member.model.service.MemberService;
 import com.remake.weplay.member.model.vo.Member;
+import com.remake.weplay.team.model.service.TeamService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +22,8 @@ public class MemberController {
 	
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	
+	private final TeamService teamService;
+
 	
 	/***
 	 * 로그인 (암호)
@@ -45,13 +48,19 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	
+	
+	
+	
 	/***
 	 * 마이페이지
 	 * @return
 	 */
 	@RequestMapping("mypage.member")
-	public String myPage() {
-		// /WEB-INF/views/member/myPage.jsp
+	public String myPage( Model model) {
+		
+		model.addAttribute("list", teamService.selectAllTeams());
 		return "member/myPage";
 	}
 	/***

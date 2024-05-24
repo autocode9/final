@@ -134,7 +134,9 @@ body {
 			<ul>
 				<li class="navi-top"><a href="allTeams">팀</a></li>
 				<li class="navi-top"><a href="">선수</a></li>
-				<li class="navi-top"><a href="">My팀</a></li>
+				<c:if test ="${not empty sessionScope.loginUser }">
+				<li class="navi-top"><a href="teamInfo?teamNo=${loginUser.teamNo}">My팀</a></li>
+				</c:if>
 				<li class="navi-top"><a href="">경기</a>
 					<ul class="navi-in">
 						<li><a href="#">전체 경기</a></li>

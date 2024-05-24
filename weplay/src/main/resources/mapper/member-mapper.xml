@@ -6,38 +6,38 @@
 	
 	<!-- 로그인용 쿼리문 -->
 	<select id="login" parameterType="member" resultType="member">
-		SELECT
-		       M.MEMBER_NO userNo,
-               MEMBER_ID userId,
-		       PASSWORD userPwd,
-		       NICKNAME nickName,
-		       AGE age,
-		       PHONE phone,
-		       ADDRESS address,
-		       INFO info,
-		       SKILL skill,
-		       POSITION position,
-		       SUB_POSITION subPosition,
-		       M.ENROLL_DATE enrollDate,
-			   UPDATE_DATE updateDate,
-			   NVL(TEAM_NO, 0) teamNo,
-			   MEMBER_TYPE memberType
-		  FROM
-		       MEMBER M
-          LEFT
-		  JOIN
-		       (SELECT
-                       TEAM_NO,
-                       MEMBER_NO,
-			   		   MEMBER_TYPE 
-                  FROM
-                       TEAM_MEMBER
-                 WHERE 
-                       STATUS = 'Y') T ON(M.MEMBER_NO = T.MEMBER_NO)
-		 WHERE
-		       MEMBER_ID = #{ userId}
-		   AND 
-		       M.STATUS = 'Y'
+	SELECT
+	    M.MEMBER_NO userNo,
+	    M.MEMBER_ID userId,
+	    M.PASSWORD userPwd,
+	    M.NICKNAME nickName,
+	    M.AGE age,
+	    M.PHONE phone,
+	    M.ADDRESS address,
+	    M.INFO info,
+	    M.SKILL skill,
+	    M.POSITION position,
+	    M.SUB_POSITION subPosition,
+	    M.ENROLL_DATE enrollDate,
+	    M.UPDATE_DATE updateDate,
+	    NVL(M.TEAM_NO, 0) teamNo,
+	    T.MEMBER_TYPE memberType
+	FROM
+	    MEMBER M
+	LEFT JOIN
+	    (SELECT
+	         TEAM_NO,
+	         MEMBER_NO,
+	         MEMBER_TYPE 
+	     FROM
+	         TEAM_MEMBER
+	     WHERE 
+	         STATUS = 'Y') T ON(M.MEMBER_NO = T.MEMBER_NO)
+	WHERE
+	    M.MEMBER_ID = #{userId}
+	AND 
+	    M.STATUS = 'Y'
+
 	</select>
 	
 	<!-- 회원가입용 쿼리문 -->
@@ -86,6 +86,7 @@
 		       SKILL=#{skill},
 		       POSITION=#{position},
 		       SUB_POSITION=#{subPosition},
+		       TEAM_NO=#{teamNo},
 		       UPDATE_DATE = SYSDATE
 		 WHERE
 			   MEMBER_ID = #{userId}

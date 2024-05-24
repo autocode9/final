@@ -31,6 +31,8 @@
 		 </when>
 		 </choose>
 	</select>
+	
+	
  	
  	
 	<select id="selectTeams" parameterType="hashmap" resultType="team">
@@ -108,6 +110,23 @@
 		       TEAM_NO = #{teamNo}
 		   AND
 		       STATUS = 'Y'
+	</select>
+	
+	<select id="selectAllTeams" resultType="team">
+		SELECT
+		       TEAM_NO AS teamNo,
+		       TEAM_NAME AS teamName,
+		       TEAM_TYPE AS teamType,
+		       LOCATION,
+		       TEAM_INFO AS teamInfo,
+		       TEAM_SKILL AS teamSkill,
+		     
+		       AVG_AGE AS avgAge,
+		       UNIFORM,
+		       FD_YEAR AS fdYear
+	FROM
+	TEAM
+	WHERE STATUS='Y'
 	</select>
 	
 	<update id="deleteTeam" parameterType="_int" >

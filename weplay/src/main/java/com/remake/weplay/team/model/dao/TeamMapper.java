@@ -33,4 +33,6 @@ public interface TeamMapper {
 	public int updateTeamApp(TeamApplication teamApp);
 	
 	int deleteTeam(int teamNo);
+	
+	List<Team> selectAllTeams();
 }

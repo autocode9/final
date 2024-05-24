@@ -33,4 +33,5 @@ public interface TeamService {
 	
 	int deleteTeam(int teamNo);
 
+	List<Team> selectAllTeams();
 }

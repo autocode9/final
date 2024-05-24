@@ -69,7 +69,18 @@
 				<td><input type="text" value="${loginUser.subPosition}" maxlength="13" required
 					name="subPosition"></td>
 			</tr>
-
+			<tr>
+				<td>팀</td>
+				<td>
+				<select name="teamNo">
+				    <option value="">팀을 선택하세요</option> <!-- 선택 안 함 옵션 추가 -->
+				  <!--  <option value="${loginUser.teamNo}">${loginUser.teamNo}</option> <!-- 선택 안 함 옵션 추가 -->
+					<c:forEach var="team" items="${list}">
+						<option value="${team.teamNo}">${team.teamName }</option>
+					</c:forEach>
+				</select> 
+				</td>
+			</tr>
 		</table>
 
 		<div align="center">

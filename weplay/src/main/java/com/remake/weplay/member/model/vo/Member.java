@@ -37,4 +37,5 @@ public class Member {
 	private String status;
 	private int teamNo;
 	private String memberType;
+	
 }
