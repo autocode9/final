@@ -41,9 +41,14 @@ public class MatchController {
 	}
 	
 	@GetMapping("matchApplications")
-	public  String forwardToMatchApplications() {
+	public String forwardToMatchApplications() {
 		return "match/matchApplications";
 	}
 	
-	
+	@GetMapping("myTeamMatch")
+	public ModelAndView forwardToMyTeamMatch(HttpSession session, ModelAndView mv) {
+		int teamNo = ((Member)session.getAttribute("loginUser")).getTeamNo();
+		mv.addObject("team", teamService.selectTeam(teamNo)).setViewName("match/myTeamMatch");
+		return mv;
+	}
 }
