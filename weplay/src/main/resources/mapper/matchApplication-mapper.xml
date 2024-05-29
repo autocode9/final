@@ -20,28 +20,22 @@
 	</resultMap>
 				
 	<insert id="applyMatch" parameterType="matchApplication">
-		INSERT INTO MATCH_APPLICATION
-		(APPLY_NO, 
-		 HOME_TEAM, 
-		 AWAY_TEAM, 
-		 MEMBER_NO, 
-		 FIELD_NO, 
-		 APPLY_NAME, 
-		 APPLY_PHONE, 
-		 APPLY_CONTENT, 
-		 MATCH_TIME, 
-		 MATCH_DATE)
+		INSERT 
+		  INTO 
+		       MATCH_APPLICATION
 		VALUES
-		(SEQ_MANO.NEXTVAL, 
-		 #{homeTeam}, 
-		 #{awayTeam}, 
-		 #{memberNo}, 
-		 #{fieldNo}, 
-		 #{applyName}, 
-		 #{applyPhone}, 
-		 #{applyContent}, 
-		 #{matchTime}, 
-		 TO_DATE(#{matchDate}, 'YYYY-MM-DD HH24:MI'))
+			   (SEQ_MANO.NEXTVAL, 
+			   #{homeTeam}, 
+			   #{awayTeam}, 
+			   #{memberNo}, 
+			   #{fieldNo}, 
+			   #{applyName}, 
+			   #{applyPhone}, 
+			   #{applyContent}, 
+			   #{matchTime}, 
+			   TO_DATE(#{matchDate}, 'YYYY-MM-DD HH24:MI'),
+			   SYSDATE,
+			   'Y')
 	</insert>
 	
 	<select id="getRecievedApplications" parameterType="_int" resultMap="matchAppResultMap">
