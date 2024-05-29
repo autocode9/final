@@ -1,6 +1,8 @@
 package com.remake.weplay.match.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,14 @@ public class MatchServiceImpl implements MatchService {
 	@Override
 	public int insertMatch(Match match) {
 		return matchMapper.insertMatch(match);
+	}
+
+	@Override
+	public Map<String, List<Match>> getMyTeamMatches(int teamNo) {
+		Map<String, List<Match>> map = new HashMap();
+		map.put("upcomingMatches", matchMapper.getUpcomingMatches(teamNo));
+		map.put("previousMatches", matchMapper.getPreviousMatches(teamNo));
+		return map;
 	}
 
 

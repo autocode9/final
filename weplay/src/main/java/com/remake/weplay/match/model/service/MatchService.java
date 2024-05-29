@@ -1,6 +1,7 @@
 package com.remake.weplay.match.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 
@@ -22,5 +23,7 @@ public interface MatchService {
 	int updateMatchApplication(MatchApplication matchApp);
 
 	int insertMatch(Match match);
+
+	Map<String, List<Match>> getMyTeamMatches(int teamNo);
 
 }

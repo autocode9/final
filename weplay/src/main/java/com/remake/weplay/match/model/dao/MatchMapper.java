@@ -24,5 +24,9 @@ public interface MatchMapper {
 	public int updateMatchApplication(MatchApplication matchApp);
 
 	public int insertMatch(Match match);
+
+	public List<Match> getUpcomingMatches(int teamNo);
+
+	public List<Match> getPreviousMatches(int teamNo);
 	
 }
