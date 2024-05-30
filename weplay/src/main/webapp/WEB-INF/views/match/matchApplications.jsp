@@ -10,7 +10,9 @@
             width: 80%;
             background-color: white;
             margin: auto;
+            padding : 2%;
         }
+        h2{ padding-left: 2%; }
         .table{text-align: center;}
         .table a{color: black;}
         .more-btn-area{
