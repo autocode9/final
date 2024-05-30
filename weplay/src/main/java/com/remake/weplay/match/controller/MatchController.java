@@ -48,9 +48,7 @@ public class MatchController {
 	@GetMapping("myTeamMatch")
 	public ModelAndView forwardToMyTeamMatch(HttpSession session, ModelAndView mv) {
 		int teamNo = ((Member)session.getAttribute("loginUser")).getTeamNo();
-		mv.addObject("team", teamService.selectTeam(teamNo))
-		  .addObject("match", matchService.getMyTeamMatches(teamNo))
-		  .setViewName("match/myTeamMatch");	
+		mv.addObject("team", teamService.selectTeam(teamNo)).setViewName("match/myTeamMatch");	
 		return mv;
 	}
 }

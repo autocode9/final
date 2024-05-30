@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +57,7 @@
                 <img src="${ team.teamLogo }"/>
             </div>
             <div id="team-info">
-            	<input type="hidden" value="${ team.teamNo }">
+            	<input type="hidden" id="teamNo" value="${ team.teamNo }">
                 <h1>${ team.teamName }</h1>
                 <h3>${ team.teamRecord }</h3>
             </div>
@@ -136,7 +137,16 @@
 		
 	
 		function getMyTeamMatch(){
-			
+			$.ajax({
+				url : 'match/myTeamMatch',
+				type : 'get',
+				data : {
+					teamNo : $('#teamNo').val()
+				},
+				success : result => {
+					console.log(result);
+				}
+			})
 		}
 	
 	</script>

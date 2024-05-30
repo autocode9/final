@@ -1,11 +1,15 @@
 package com.remake.weplay.match.controller;
 
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,4 +43,17 @@ public class AjaxMatchController {
 
 		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	}
+	
+	@GetMapping("/myTeamMatch")
+	public ResponseEntity<ResponseData> getMyTeamMatches(int teamNo) {
+
+		ResponseData rd = new ResponseData().builder().data(matchService.getMyTeamMatches(teamNo))
+													  .message("응답 성공").responseCode("00").build();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
+	}
+	
 }

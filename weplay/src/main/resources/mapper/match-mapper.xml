@@ -3,17 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.remake.weplay.match.model.dao.MatchMapper">
-	<!--  
-	<resultMap type="match" id="matchList">
-		<result column="MATCH_NO" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
-		<result column="" property=""/>
+	 
+	<resultMap type="match" id="matchResultMap">
+		<result column="MATCH_NO" 		property="matchNo"/>
+		<result column="HOME_TEAM" 		property="homeTeam"/>
+		<result column="HOME_TEAM_NAME" property="homeTeamName"/>
+		<result column="HOME_TEAM_LOGO" property="homeTeamLogo"/>
+		<result column="AWAY_TEAM" 		property="awayTeam"/>
+		<result column="AWAY_TEAM_NAME" property="awayTeamName"/>
+		<result column="AWAY_TEAM_LOGO" property="awayTeamLogo"/>
+		<result column="MATCH_TIME" 	property="matchTime"/>
+		<result column="FIELD_NO" 		property="fieldNo"/>
+		<result column="FIELD_NAME" 	property="fieldName"/>
+		<result column="MATCH_DATE" 	property="matchDate"/>
+		<result column="STATUS" 		property="status"/>
 	</resultMap>
-	-->
-	
 	
 	<insert id="insertMatch" parameterType="match">
 		INSERT INTO MATCH
@@ -21,13 +25,59 @@
 		VALUES
 		(SEQ_MATCH.NEXTVAL, #{fieldNo}, #{homeTeam}, #{awayTeam}, TO_DATE(#{matchDate}, 'YYYY-MM-DD HH24:MI'), #{matchTime})
 	</insert>
-	<!--  
-	<select id="getUpcomingMatches" parameterType="_int" resultMap="">
-	
+	 
+	<select id="getUpcomingMatches" parameterType="_int" resultMap="matchResultMap">
+		SELECT
+		       MATCH_NO,
+		       HOME_TEAM,
+		       HOME_TEAM_NAME,
+		       HOME_TEAM_LOGO,
+		       AWAY_TEAM,
+		       AWAY_TEAM_NAME,
+		       AWAY_TEAM_LOGO,
+		       MATCH_TIME,
+		       FIELD_NO,
+		       FIELD_NAME,
+		       TO_CHAR(MATCH_DATE, 'YYYY-MM-DD HH24:MI') AS MATCH_DATE,
+		       STATUS
+		  FROM
+		       V_TEAM_MATCH
+		 WHERE
+		       (HOME_TEAM = 2 OR AWAY_TEAM = 2)
+		   AND
+		       MATCH_DATE > SYSDATE
+		   AND    
+		       STATUS = 'R'
+		 ORDER
+		    BY
+		       MATCH_DATE
 	</select>
 	
-	<select id="getPreviousMatches" parameterType="_int" resultMap="">
-	
+	<select id="getPreviousMatches" parameterType="_int" resultMap="matchResultMap">
+		SELECT
+		       MATCH_NO,
+		       HOME_TEAM,
+		       HOME_TEAM_NAME,
+		       HOME_TEAM_LOGO,
+		       AWAY_TEAM,
+		       AWAY_TEAM_NAME,
+		       AWAY_TEAM_LOGO,
+		       MATCH_TIME,
+		       FIELD_NO,
+		       FIELD_NAME,
+		       TO_CHAR(MATCH_DATE, 'YYYY-MM-DD HH24:MI') AS MATCH_DATE,
+		       STATUS
+		  FROM
+		       V_TEAM_MATCH
+		 WHERE
+		       (HOME_TEAM = 2 OR AWAY_TEAM = 2)
+		   AND
+		       <![CDATA[MATCH_DATE < SYSDATE]]>
+		   AND    
+		       STATUS IN ('R', 'D')
+		 ORDER
+		    BY
+		       MATCH_DATE DESC
 	</select>
-	-->
+	
 </mapper>
