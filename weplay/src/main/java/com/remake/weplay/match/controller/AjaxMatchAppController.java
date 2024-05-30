@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.remake.weplay.commons.model.vo.ResponseData;
+import com.remake.weplay.commons.template.ResponseProcess;
 import com.remake.weplay.match.model.service.MatchService;
 import com.remake.weplay.match.model.vo.MatchApplication;
 
@@ -28,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class AjaxMatchAppController {
 	
 	private final MatchService matchService;
+	private final ResponseProcess responseProcess;
 	
 	@GetMapping("/getMatchApplications")
 	public ResponseEntity<ResponseData> getMatchApplication(int teamNo, int recievedLimit, int sentLimit) {
@@ -37,34 +39,20 @@ public class AjaxMatchAppController {
 		List<MatchApplication> recievedList = matchService.getRecievedApplications(teamNo, new RowBounds(0, recievedLimit));
 		List<MatchApplication> sentList = matchService.getSentApplications(teamNo, new RowBounds(0, sentLimit));
 		
-		Map<String, Object> result = new HashMap();
-		result.put("recievedListCount", recievedListCount);
-		result.put("sentListCount", sentListCount);
-		result.put("recievedList", recievedList);
-		result.put("sentList", sentList);
-		
-		ResponseData rd = new ResponseData().builder().data(result).message("응답 성공").responseCode("00").build();
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		Map<String, Object> data = new HashMap();
+		data.put("recievedListCount", recievedListCount);
+		data.put("sentListCount", sentListCount);
+		data.put("recievedList", recievedList);
+		data.put("sentList", sentList);
 
-		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
+		return responseProcess.success(data);
 	}
 	
 	@PostMapping("/updateMatchApplication")
 	public ResponseEntity<ResponseData> updateMatchApplication(MatchApplication matchApp) {
-		int result = matchService.updateMatchApplication(matchApp);
-		String data;
-		
-		if(result > 0) data = "Y";
-		else data = "N";
-		
-		ResponseData rd = new ResponseData().builder().data(data).message("응답 성공").responseCode("00").build();
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
+		String data = matchService.updateMatchApplication(matchApp);
+		if(data.equals("Y")) return responseProcess.success(data);
+		else return responseProcess.fail(data);
 	}
 	
 }

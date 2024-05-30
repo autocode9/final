@@ -77,28 +77,6 @@
                         <td>2024.06.07<br>오전 10시</td>
                         <td><button class="btn btn-sm btn-outline-danger">경기 취소</button></td>
                     </tr>
-                    <tr>
-                        <td>리메이크 FC</td>
-                        <td class="logo"><img src=""/></td>
-                        <td>VS</td>
-                        <td class="logo"><img src=""/></td>
-                        <td>경실련 FC</td>
-                        <td>60분</td>
-                        <td>종로구 한강다목적운동장</td>
-                        <td>2024.06.14<br>오전 10시</td>
-                        <td><button class="btn btn-sm btn-outline-danger">경기 취소</button></td>
-                    </tr>
-                    <tr>
-                        <td>리메이크 FC</td>
-                        <td class="logo"><img src=""/></td>
-                        <td>VS</td>
-                        <td class="logo"><img src=""/></td>
-                        <td>경실련 FC</td>
-                        <td>60분</td>
-                        <td>종로구 한강다목적운동장</td>
-                        <td>2024.06.14<br>오전 10시</td>
-                        <td><button class="btn btn-sm btn-outline-danger">경기 취소</button></td>
-                    </tr>
                 </table>
             </div>
             <div id="history-area">
@@ -115,17 +93,7 @@
                         <td>2024.05.05<br>오전 10시</td>
                         <td>경기 종료</td>
                     </tr>
-                    <tr>
-                        <td>리메이크 FC</td>
-                        <td class="logo"><img src=""/></td>
-                        <td>2 : 0</td>
-                        <td class="logo"><img src=""/></td>
-                        <td>경실련 FC</td>
-                        <td>90분</td>
-                        <td>종로구 한강다목적운동장</td>
-                        <td>2024.05.05<br>오전 10시</td>
-                        <td><a href="">경기 기록하기</a></td>
-                    </tr>
+
                 </table>
             </div>
         </div>
@@ -134,21 +102,58 @@
     </div>
 
 	<script>
+		$(() => {
+			getUpcomingMatch();
+			getPreviousMatch();
+		});
 		
-	
-		function getMyTeamMatch(){
+		var upcomingMatchLimit = 5;
+		var previousMatchLimit = 5;
+		
+		function getUpcomingMatch(){
 			$.ajax({
-				url : 'match/myTeamMatch',
+				url : 'match/upcomingMatch',
 				type : 'get',
 				data : {
-					teamNo : $('#teamNo').val()
+					teamNo : $('#teamNo').val(),
+					matchLimit : upcomingMatchLimit
 				},
 				success : result => {
 					console.log(result);
+					console.log(result.data.matchList);
+					const matchList = result.data.matchList;
+					
+					for(let i in matchList){
+						const match = matchList[i];
+						createUpcomingMatch(match);
+						
+					}
+					
+					
+				}
+			})
+		}
+		
+		function getPreviousMatch(){
+			$.ajax({
+				url : 'match/previousMatch',
+				type : 'get',
+				data : {
+					teamNo : $('#teamNo').val(),
+					matchLimit : previousMatchLimit
+				},
+				success : result => {
+					console.log(result);
+					console.log(result.data.matchList);
 				}
 			})
 		}
 	
+		function createUpcomingMatch(match){
+			
+			const tr = document.createElement('tr');
+			
+		}
 	</script>
 
 </body>

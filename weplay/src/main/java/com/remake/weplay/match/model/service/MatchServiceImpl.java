@@ -45,22 +45,40 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public int updateMatchApplication(MatchApplication matchApp) {
-		return matchMapper.updateMatchApplication(matchApp);
+	public String updateMatchApplication(MatchApplication matchApp) {
+		int result = matchMapper.updateMatchApplication(matchApp);
+		if(result > 0) return "Y";
+		else return "N";
 	}
 
 	@Override
-	public int insertMatch(Match match) {
-		return matchMapper.insertMatch(match);
+	public String insertMatch(Match match) {
+		int result = matchMapper.insertMatch(match);
+		if(result > 0) return "Y";
+		else return "N";
 	}
 
 	@Override
-	public Map<String, List<Match>> getMyTeamMatches(int teamNo) {
-		Map<String, List<Match>> map = new HashMap();
-		map.put("upcomingMatches", matchMapper.getUpcomingMatches(teamNo));
-		map.put("previousMatches", matchMapper.getPreviousMatches(teamNo));
-		return map;
+	public int upcomingMatchCount(int teamNo) {
+		return matchMapper.upcomingMatchCount(teamNo);
 	}
+	
+	@Override
+	public int previousMatchCount(int teamNo) {
+		return matchMapper.previousMatchCount(teamNo);
+	}
+	
+	@Override
+	public List<Match> getUpcomingMatches(int teamNo, RowBounds rowBounds) {
+		return matchMapper.getUpcomingMatches(teamNo);
+	}
+
+	@Override
+	public List<Match> getPreviousMatches(int teamNo, RowBounds rowBounds) {
+		return matchMapper.getPreviousMatches(teamNo);
+	}
+
+
 
 
 }

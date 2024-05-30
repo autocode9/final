@@ -26,4 +26,5 @@ public class Match {
 	private String homeTeamLogo;
 	private String awayTeamLogo;
 	private String fieldName;
+	private String score;
 }

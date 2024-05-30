@@ -12,6 +12,7 @@
 		<result column="AWAY_TEAM" 		property="awayTeam"/>
 		<result column="AWAY_TEAM_NAME" property="awayTeamName"/>
 		<result column="AWAY_TEAM_LOGO" property="awayTeamLogo"/>
+		<result column="SCORE"			property="score"/>
 		<result column="MATCH_TIME" 	property="matchTime"/>
 		<result column="FIELD_NO" 		property="fieldNo"/>
 		<result column="FIELD_NAME" 	property="fieldName"/>
@@ -25,6 +26,33 @@
 		VALUES
 		(SEQ_MATCH.NEXTVAL, #{fieldNo}, #{homeTeam}, #{awayTeam}, TO_DATE(#{matchDate}, 'YYYY-MM-DD HH24:MI'), #{matchTime})
 	</insert>
+	
+	<select id="upcomingMatchCount" parameterType="_int" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       MATCH
+		 WHERE
+		       (HOME_TEAM = #{teamNo} OR AWAY_TEAM = #{teamNo})
+		   AND
+		       MATCH_DATE > SYSDATE
+		   AND    
+		       STATUS = 'R'  
+	</select>
+	
+	<select id="previousMatchCount" parameterType="_int" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       MATCH
+		 WHERE
+		       (HOME_TEAM = #{teamNo} OR AWAY_TEAM = #{teamNo})
+		   AND
+		       <![CDATA[MATCH_DATE < SYSDATE]]>
+		   AND    
+		       STATUS IN ('R', 'D')  
+	</select>
+	
 	 
 	<select id="getUpcomingMatches" parameterType="_int" resultMap="matchResultMap">
 		SELECT
@@ -43,7 +71,7 @@
 		  FROM
 		       V_TEAM_MATCH
 		 WHERE
-		       (HOME_TEAM = 2 OR AWAY_TEAM = 2)
+		       (HOME_TEAM = #{teamNo} OR AWAY_TEAM = #{teamNo})
 		   AND
 		       MATCH_DATE > SYSDATE
 		   AND    
@@ -62,6 +90,7 @@
 		       AWAY_TEAM,
 		       AWAY_TEAM_NAME,
 		       AWAY_TEAM_LOGO,
+		       SCORE,
 		       MATCH_TIME,
 		       FIELD_NO,
 		       FIELD_NAME,
@@ -70,7 +99,7 @@
 		  FROM
 		       V_TEAM_MATCH
 		 WHERE
-		       (HOME_TEAM = 2 OR AWAY_TEAM = 2)
+		       (HOME_TEAM = #{teamNo} OR AWAY_TEAM = #{teamNo})
 		   AND
 		       <![CDATA[MATCH_DATE < SYSDATE]]>
 		   AND    

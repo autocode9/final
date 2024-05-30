@@ -25,8 +25,13 @@ public interface MatchMapper {
 
 	public int insertMatch(Match match);
 
+	public int upcomingMatchCount(int teamNo);
+	
+	public int previousMatchCount(int teamNo);
+	
 	public List<Match> getUpcomingMatches(int teamNo);
 
 	public List<Match> getPreviousMatches(int teamNo);
+
 	
 }
