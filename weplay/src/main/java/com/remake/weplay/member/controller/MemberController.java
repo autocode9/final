@@ -44,7 +44,6 @@ public class MemberController {
 			// model.addAttribute
 			mv.addObject("errorMsg", "로그인 실패..").setViewName("common/errorPage");
 			// 메소드 체이닝 가능
-		System.out.println(loginUser);
 		}
 		return mv;
 	}
