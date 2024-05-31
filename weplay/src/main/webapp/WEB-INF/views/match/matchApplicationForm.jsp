@@ -36,7 +36,7 @@
         }
         #search-team-btn{
             float: inline-end;
-            margin-right: 10%;
+            margin-right: 20%;
         }
         #home-teamName, #away-teamName{
             width: 35%;

@@ -38,7 +38,7 @@ body {
 		text-decoration : none;
 		color: white;
 	}
-
+	> label {color:white;}
 }
 #header-navibar>ul {
 	width: 100%;
@@ -120,7 +120,7 @@ body {
 					<a href="loginForm.member">로그인</a>| <a href="enrollForm.member">회원가입</a>
 				</c:when>
 				<c:otherwise>
-					<label >${ loginUser.nickName }님 환영합니다</label> <br>
+					<label><b>${ loginUser.nickName }</b>님 환영합니다</label> <br>
 					<a href="mypage.member">마이페이지</a> | <a href="">경기장 대여 내역</a> | <a href="logout.member">로그아웃 </a>
 				</c:otherwise>
 			</c:choose>
