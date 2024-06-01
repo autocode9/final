@@ -64,7 +64,7 @@ function getMatchApplications(boardLimit){
 			$('#sent-area tbody').html('');
 			
 			if(recievedList.length == 0){
-				$('#recieved-area tbody').html('<tr><td colspan="6">받은 신청 내역이 없습니다.</td></tr>');
+				$('#recieved-area tbody').html('<tr><td colspan="8">받은 신청 내역이 없습니다.</td></tr>');
 			}
 			else{
 				for(let i in recievedList){
@@ -73,7 +73,7 @@ function getMatchApplications(boardLimit){
 				}
 			}
 			if(sentList.length == 0){
-				$('#sent-area tbody').html('<tr><td colspan="6">보낸 신청 내역이 없습니다.</td></tr>');
+				$('#sent-area tbody').html('<tr><td colspan="8">보낸 신청 내역이 없습니다.</td></tr>');
 			}
 			else{
 				for(let i in sentList){

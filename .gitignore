@@ -28,14 +28,10 @@ replay_pid*
 .project
 .springBeans
 
-# root-context
+# root-context 
 root-context
 /.metadata/
 weplay/.settings/org.eclipse.jdt.core.prefs
-weplay/.settings/org.eclipse.jdt.core.prefs
 weplay/.settings/org.eclipse.wst.common.component
-weplay/src/main/webapp/WEB-INF/views/www.jsp
-Servers/.settings/org.eclipse.wst.server.core.prefs
 weplay/.settings/org.eclipse.wst.ws.service.policy.prefs
-Servers/.settings/org.eclipse.wst.server.core.prefs
 Servers/.settings/org.eclipse.wst.server.core.prefs
