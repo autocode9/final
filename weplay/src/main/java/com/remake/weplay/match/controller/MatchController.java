@@ -51,4 +51,10 @@ public class MatchController {
 		mv.addObject("team", teamService.selectTeam(teamNo)).setViewName("match/myTeamMatch");	
 		return mv;
 	}
+	
+	@GetMapping("matchInfo")
+	public String forwardToMatchInfo() {
+		return "match/matchInfo";
+	}
+	
 }
