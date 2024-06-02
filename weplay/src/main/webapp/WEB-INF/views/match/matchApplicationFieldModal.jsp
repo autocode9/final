@@ -91,8 +91,8 @@
 					query : $('#query').val()
 				},
 				success : result => {
-					const pageInfo = result[0];
-					const fields = result[1];
+					const pageInfo = result.data.pageInfo;
+					const fields = result.data.fields;
 					
 					$('#field-result-area').html(createFieldResult(pageInfo.listCount));
 					

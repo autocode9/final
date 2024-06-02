@@ -153,7 +153,7 @@ body {
 						<li><a href="#">팀원 모집</a></li>
 						<li><a href="#">팀 구함</a></li>
 					</ul></li class="navi-top">
-				<li class="navi-top"><a href="">경기장 예약</a></li>
+				<li class="navi-top"><a href="fields">경기장 </a></li>
 			</ul>
 		</div>
 

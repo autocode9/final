@@ -43,7 +43,7 @@
 			   CITY || ' ' || DISTRICT AS LOCATION,
 			   GROUND,
 			   WIDTH || 'm' || ' x ' || LENGTH || 'm' AS "SIZE",
-			   BUILT_YEAR
+			   NVL(BUILT_YEAR, '정보 없음') AS BUILT_YEAR
 	      FROM
 	           FIELD
 	     <if test="query != 'all'">
