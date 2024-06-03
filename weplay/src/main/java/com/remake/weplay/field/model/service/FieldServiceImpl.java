@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.remake.weplay.field.model.dao.FieldMapper;
 import com.remake.weplay.field.model.vo.Field;
+import com.remake.weplay.field.model.vo.FieldRental;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +31,22 @@ public class FieldServiceImpl implements FieldService {
 	@Override
 	public Field selectField(int fieldNo) {
 		return fieldMapper.selectField(fieldNo);
+	}
+
+	@Override
+	public List<String> findByRentalDate(FieldRental fieldRental) {
+		return fieldMapper.findByRentalDate(fieldRental);
+	}
+
+	@Override
+	public String addRental(FieldRental fieldRental) {
+		if(fieldMapper.addRental(fieldRental) > 0 ) return "Y";
+		else return "N";
+	}
+
+	@Override
+	public List<FieldRental> getRentals(FieldRental fieldRental, RowBounds rowBounds) {
+		return fieldMapper.getRentals(fieldRental, rowBounds);
 	}
 	
 

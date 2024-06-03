@@ -25,4 +25,9 @@ public class FieldController {
 		return mv;
 	}
 	
+	@GetMapping("fieldRentals")
+	public String forwardToFieldRentals() {
+		return "field/fieldRentals";
+	}
+	
 }

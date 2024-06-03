@@ -142,55 +142,7 @@
     
 	<script type="text/javascript" src="resources/js/field/kakaoMap.js"></script>
 	
-    <script>
-        $(()=>{
-        	
-        	var now_utc = Date.now()
-        	var timeOff = new Date().getTimezoneOffset()*60000;
-        	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-        	
-        	$('#rentalDate').attr('min', today);
-        	
-            $('#toRentBtn').click(()=>{
-                $('#input-area').removeAttr('class', 'hidden');
-                $('#btn-area').attr('class', 'hidden');
-            });
-            $('#rentalDate').change(()=>{
-            	$.ajax({
-            		url : 'fields/rentalTime',
-            		type : 'get',
-            		data : {
-            			fieldNo : $('#fieldNo').val(),
-            			rentalDate : $('#rentalDate').val()
-            		},
-            		success : result => {
-            			console.log(result);
-            		}
-            		
-            	});
-            	
-            	$('#rentalTime').attr('disabled', false);
-            });
-            $('#rentField').click(()=>{
-                if($('#rentalDate').val() != '' && $('#endTime').val() != ''){
-                    $('.modal-body').find('h4').text($('#info-area').find('h2').text());
-                    const info = $('#rentalDate').val() + ' | ' 
-                               + $('#rentalTime').val() + ' | 2시간 <br>'
-                               + '가격 : ' + $('#price').val() + '원'; 
-                    $('.modal-body').find('p').html(info);
-                } else{
-                    alert('필수 정보를 입력해주세요!');
-                    return false;
-                }
-            });
-            $('#rent-submit').click(()=>{
-                if(confirm('결제하시겠습니까?')){
-
-                }
-            })
-        })
-    </script>
-
+    <script type="text/javascript" src="resources/js/field/fieldInfo.js"></script>
     
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.remake.weplay.field.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
@@ -40,4 +41,6 @@ public class AjaxFieldController {
 		data.put("fields", fieldService.selectFields(map, Pagination.getRowBounds(pi)));
 		return responseProcess.success(data);
 	}
+
+	
 }
