@@ -13,6 +13,18 @@
 		<result column="BUILT_YEAR" property="builtYear" />
 	</resultMap>
 	
+	<sql id="field">
+		SELECT
+			   FIELD_NO,
+			   FIELD_NAME,
+			   CITY || ' ' || DISTRICT AS LOCATION,
+			   GROUND,
+			   WIDTH || 'm' || ' x ' || LENGTH || 'm' AS "SIZE",
+			   NVL(BUILT_YEAR, '정보 없음') AS BUILT_YEAR
+	      FROM
+	           FIELD
+	</sql>
+	
 	<select id="countFields" parameterType="hashmap" resultType="_int">
 		SELECT
 		       COUNT(*)
@@ -37,15 +49,7 @@
 	</select>
 	
 	<select id="selectFields" parameterType="hashmap" resultMap="fieldResultMap">
-		SELECT
-		       FIELD_NO,
-			   FIELD_NAME,
-			   CITY || ' ' || DISTRICT AS LOCATION,
-			   GROUND,
-			   WIDTH || 'm' || ' x ' || LENGTH || 'm' AS "SIZE",
-			   NVL(BUILT_YEAR, '정보 없음') AS BUILT_YEAR
-	      FROM
-	           FIELD
+		 <include refid="field"/>
 	     <if test="query != 'all'">
 	     <choose>
 	     	<when test="query != 'all' and category == 'all'">
@@ -65,6 +69,12 @@
 	     ORDER
 	        BY 
 	           FIELD_NO
+	</select>
+	
+	<select id="selectField" parameterType="_int" resultMap="fieldResultMap">
+		<include refid="field"/>
+		WHERE
+		      FIELD_NO = #{fieldNo}
 	</select>
 	
 </mapper>

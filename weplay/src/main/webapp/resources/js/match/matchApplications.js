@@ -101,8 +101,7 @@ function createRecievedTr(props){
 				 	 + '<input type="hidden" class="homeTeamNo" value="' + props.homeTeam + '">'
 				  	 + '<a href="teamInfo?teamNo=' + props.homeTeam + '">' + props.opponentName + '</a>';
 
-	tds[1].innerHTML = '<input type="hidden" class="fieldNo" value="' + props.fieldNo + '">'
-    			  	 + '<a href="">' + props.fieldName + '</a>';  
+	tds[1].innerHTML = '<a href="field?fieldNo=' + props.fieldNo + '">' + props.fieldName + '</a>';
 	
 	tds[2].innerHTML = props.matchDate;
 
@@ -138,8 +137,7 @@ function createSentTr(props){
 				     + '<input type="hidden" class="awayTeamNo" value="' + props.awayTeam + '">'
 				  	 + '<a href="teamInfo?teamNo=' + props.awayTeam + '">' + props.opponentName + '</a>';
 
-	tds[1].innerHTML = '<input type="hidden" class="fieldNo" value="' + props.fieldNo + '">'
-    			  	 + '<a href="">' + props.fieldName + '</a>';  
+	tds[1].innerHTML = '<a href="field?fieldNo=' + props.fieldNo + '">' + props.fieldName + '</a>';  
 	
 	tds[2].innerHTML = props.matchDate;
 

@@ -26,6 +26,11 @@ public class FieldServiceImpl implements FieldService {
 	public List<Field> selectFields(HashMap<String, String> map, RowBounds rowBounds) {
 		return fieldMapper.selectFields(map, rowBounds);
 	}
+
+	@Override
+	public Field selectField(int fieldNo) {
+		return fieldMapper.selectField(fieldNo);
+	}
 	
 
 

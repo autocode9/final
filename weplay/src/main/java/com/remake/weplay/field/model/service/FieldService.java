@@ -13,5 +13,7 @@ public interface FieldService {
 	
 	List<Field> selectFields(HashMap<String, String> map, RowBounds rowBounds);
 
+	Field selectField(int fieldNo);
+
 
 }

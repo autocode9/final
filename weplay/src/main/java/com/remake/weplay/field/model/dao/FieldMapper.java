@@ -16,5 +16,7 @@ public interface FieldMapper {
 	
 	public List<Field> selectFields(HashMap<String, String> map, RowBounds rowBounds);
 
+	public Field selectField(int fieldNo);
+
 
 }
