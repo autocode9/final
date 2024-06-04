@@ -99,7 +99,7 @@
                         <label>가격 : </label> <input type="number" id="price" value="<c:out value="${ price }" default="50000"/>" readonly>원
                     </div>
                     <div>
-                        <button type="button" id="rentField" class="btn btn-primary rent-btn" data-toggle="modal" data-target="#rentModal">대여</button>
+                        <button id="rentField" class="btn btn-primary rent-btn" data-toggle="modal" data-target="#rentModal">대여</button>
                     </div>
                 </div>
                 

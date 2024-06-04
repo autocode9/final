@@ -18,22 +18,22 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var ps = new kakao.maps.services.Places(); 
 
 // 키워드로 장소를 검색합니다
-
 const $keyword = $('#fieldName').text();
 ps.keywordSearch($keyword, placesSearchCB); 
 
 // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 function placesSearchCB (data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-
+		const field = data[0];
+		
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         var bounds = new kakao.maps.LatLngBounds();
 		
-		$('#address').html('<a href="' + data[0].place_url + '">' + data[0].address_name + '</a>');
-		$('#phone').text(data[0].phone);
-        displayMarker(data[0]);    
-        bounds.extend(new kakao.maps.LatLng(data[0].y, data[0].x));
+		$('#address').html('<a href="' + field.place_url + '">' + field.address_name + '</a>');
+		$('#phone').text(field.phone);
+        displayMarker(field);    
+        bounds.extend(new kakao.maps.LatLng(field.y, field.x));
 
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
         map.setBounds(bounds);
