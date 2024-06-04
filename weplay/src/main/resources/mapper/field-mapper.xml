@@ -13,6 +13,43 @@
 		<result column="BUILT_YEAR" property="builtYear" />
 	</resultMap>
 	
+	<resultMap type="fieldRental" id="fieldRentalResultMap">
+		<result column="RENTAL_NO" property="rentalNo" />
+		<result column="FIELD_NO" property="fieldNo" />
+		<result column="FIELD_NAME" property="fieldName" />
+		<result column="RENTAL_DATE" property="rentalDate" />
+		<result column="RENTAL_TIME" property="rentalTime" />
+		<result column="RESERVED_DATE" property="reservedDate" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+	<sql id="field">
+		SELECT
+			   FIELD_NO,
+			   FIELD_NAME,
+			   CITY || ' ' || DISTRICT AS LOCATION,
+			   GROUND,
+			   WIDTH || 'm' || ' x ' || LENGTH || 'm' AS "SIZE",
+			   NVL(BUILT_YEAR, '정보 없음') AS BUILT_YEAR
+	      FROM
+	           FIELD
+	</sql>
+	
+	<sql id="fieldRental">
+		SELECT
+		       RENTAL_NO,
+		       FIELD_NO,
+		       FIELD_NAME,
+		       RENTAL_DATE,
+		       RENTAL_TIME,
+		       RESERVED_DATE,
+		       STATUS
+		  FROM
+		       FIELD_RENTAL
+		  JOIN 
+		       FIELD USING(FIELD_NO)
+	</sql>
+	
 	<select id="countFields" parameterType="hashmap" resultType="_int">
 		SELECT
 		       COUNT(*)
@@ -37,15 +74,7 @@
 	</select>
 	
 	<select id="selectFields" parameterType="hashmap" resultMap="fieldResultMap">
-		SELECT
-		       FIELD_NO,
-			   FIELD_NAME,
-			   CITY || ' ' || DISTRICT AS LOCATION,
-			   GROUND,
-			   WIDTH || 'm' || ' x ' || LENGTH || 'm' AS "SIZE",
-			   BUILT_YEAR
-	      FROM
-	           FIELD
+		 <include refid="field"/>
 	     <if test="query != 'all'">
 	     <choose>
 	     	<when test="query != 'all' and category == 'all'">
@@ -65,6 +94,61 @@
 	     ORDER
 	        BY 
 	           FIELD_NO
+	</select>
+	
+	<select id="selectField" parameterType="_int" resultMap="fieldResultMap">
+		<include refid="field"/>
+		WHERE
+		      FIELD_NO = #{fieldNo}
+	</select>
+	
+	<select id="findByRentalDate" parameterType="fieldRental" resultType="string">
+		SELECT
+		       RENTAL_TIME
+		  FROM
+		       FIELD_RENTAL
+		 WHERE
+		       RENTAL_DATE = TO_DATE(#{ rentalDate }, 'YYYY-MM-DD')
+		   AND
+		       STATUS = 'Y'
+	</select>
+	
+	<insert id="addRental" parameterType="fieldRental">
+		INSERT
+		  INTO
+		       FIELD_RENTAL
+		       (RENTAL_NO, FIELD_NO, MEMBER_NO, RENTAL_DATE, RENTAL_TIME)
+		VALUES
+		       (SEQ_RENTAL.NEXTVAL, #{fieldNo}, #{memberNo}, #{rentalDate}, #{rentalTime})
+	</insert>
+	
+	<select id="getRentals" parameterType="fieldRental" resultMap="fieldRentalResultMap">
+		<include refid="fieldRental"/>
+		<choose>
+			<when test='status eq "Y"'>
+		 WHERE
+		       RENTAL_DATE > SYSDATE
+		   AND
+		       STATUS = 'Y'
+		   AND
+		       MEMBER_NO = #{memberNo}
+		 ORDER
+		    BY RENTAL_DATE, RENTAL_TIME
+			</when>
+			<otherwise>
+		 WHERE
+		       (RENTAL_DATE <![CDATA[<]]> SYSDATE
+		   AND
+		       STATUS = 'Y'
+		    OR
+		       STATUS = 'N')
+		   AND
+		       MEMBER_NO = #{memberNo}
+		 ORDER
+		    BY RENTAL_DATE DESC, RENTAL_TIME DESC 
+			</otherwise>
+		</choose>
+		
 	</select>
 	
 </mapper>

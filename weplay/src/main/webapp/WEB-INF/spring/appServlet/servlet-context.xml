@@ -29,6 +29,7 @@
 			<mapping path="/matchApplicationForm"/>
 			<mapping path="/matchApplications"/>
 			<mapping path="/myTeamMatch"/>
+			<mapping path="/fieldRentals"/>
 			<beans:bean class="com.remake.weplay.commons.interceptor.LoginInterceptor" id="loginInterceptor"/>
 		</interceptor>
 		<interceptor>

@@ -1,0 +1,84 @@
+@charset "UTF-8";
+#outer{
+    width:80%;
+    margin: auto;
+    padding: 2%;
+    background-color: white;
+}
+#match-header{
+    width: 100%;
+    text-align: center;
+    > h3, h2{
+        display: inline-flex;
+    }
+    > h2{
+        margin-left: 20%;
+        margin-right: 20%;
+        font-weight: 600;
+    }
+}
+a{
+    color: black;
+}
+#title-area{
+    display: flex;
+    margin-bottom: 1%;
+}
+.team-area{
+    width: 35%;
+    text-align: center;
+    padding-top: 1%;
+}
+.logo{
+    width: 10%;
+    >img{
+        width: 100%;
+    }
+}
+#score-area{
+    width: 20%;
+    text-align: center;
+    h3{ 
+        margin: auto;
+        line-height: 300%;
+    }
+    h2{
+        margin: auto;
+        line-height: 280%;
+    }
+}
+
+#record-area{
+    margin-bottom: 1%;
+    text-align: center;
+}
+#info-area{
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+.team-info, .player-info{
+    width: 35%;
+}
+.team-info{
+    padding: 2%;
+}
+.player-info{
+    background-color: #343a40;
+    overflow: auto;
+    >table{
+        width: 100%;
+    }
+}
+#match-info{
+    width: 30%;
+    background-color: lightgray;
+    padding: 2%;
+    >label{
+        margin: 2%;
+    }
+}
+#match-footer{
+    margin-top: 2%;
+    text-align: center;
+}

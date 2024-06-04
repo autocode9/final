@@ -121,7 +121,7 @@ body {
 				</c:when>
 				<c:otherwise>
 					<label><b>${ loginUser.nickName }</b>님 환영합니다</label> <br>
-					<a href="mypage.member">마이페이지</a> | <a href="">경기장 대여 내역</a> | <a href="logout.member">로그아웃 </a>
+					<a href="mypage.member">마이페이지</a> | <a href="fieldRentals">경기장 대여 내역</a> | <a href="logout.member">로그아웃 </a>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -153,7 +153,7 @@ body {
 						<li><a href="#">팀원 모집</a></li>
 						<li><a href="#">팀 구함</a></li>
 					</ul></li class="navi-top">
-				<li class="navi-top"><a href="">경기장 예약</a></li>
+				<li class="navi-top"><a href="fields">경기장 </a></li>
 			</ul>
 		</div>
 

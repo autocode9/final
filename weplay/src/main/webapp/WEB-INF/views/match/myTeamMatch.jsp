@@ -83,6 +83,10 @@
 		$(() => {
 			getUpcomingMatch();
 			getPreviousMatch();
+			
+			
+			
+			
 		});
 		
 		var upcomingMatchLimit = 5;
@@ -162,7 +166,7 @@
 			tds[5].innerHTML = match.matchTime;
 			tds[6].innerHTML = '<a href="">' + match.fieldName + '</a>';
 			tds[7].innerHTML = match.matchDate;
-			tds[8].innerHTML = '<a href="" class="btn btn-sm btn-outline-success">상세 보기</a><br>'
+			tds[8].innerHTML = '<a href="matchInfo?=' + match.matchNo + '" class="btn btn-sm btn-outline-success">상세 보기</a><br>'
 				             + '<button class="btn btn-sm btn-outline-danger cancel-match">경기 취소</button>';
 			
 			for(let i in tds){
