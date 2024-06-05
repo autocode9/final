@@ -9,6 +9,7 @@ function selectCities(){ // 시도 셀렉트 옵션 조회
 		url : 'city',
 		type : 'get',
 		success : result => {
+			console.log(result);
 			const city = result.data;
 			let options = optionAll;
 			for(let i in city){

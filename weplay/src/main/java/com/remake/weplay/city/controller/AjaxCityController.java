@@ -13,7 +13,7 @@ import com.remake.weplay.commons.template.ResponseProcess;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value="city", produces="application/json; charset=UTF-8")
+@RequestMapping("city")
 @RequiredArgsConstructor
 public class AjaxCityController {
 	
