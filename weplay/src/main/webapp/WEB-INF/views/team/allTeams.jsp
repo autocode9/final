@@ -65,7 +65,7 @@
 	<jsp:include page="../common/header.jsp"/>
 	
 	<script src="resources/js/team/allTeams.js"></script>
-	<script src="resources/js/common/city-district-select.js"></script>
+	<script src="resources/js/common/city-district-select.js?ver=0"></script>
 
     <div id="outer">
         <div id="search-area">
