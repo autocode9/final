@@ -1,12 +1,14 @@
 package com.remake.weplay.city.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
 import com.remake.weplay.city.model.service.CityService;
+import com.remake.weplay.commons.model.vo.ResponseData;
+import com.remake.weplay.commons.template.ResponseProcess;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,16 +19,15 @@ public class AjaxCityController {
 	
 
 	private final CityService cityService;
-
-	private final Gson gson;
+	private final ResponseProcess responseProcess;
 	
 	@GetMapping
-	public String selectCities() {
-		return gson.toJson(cityService.selectCities());
+	public ResponseEntity<ResponseData> selectCities() {
+		return responseProcess.success(cityService.selectCities());
 	}
 	
 	@GetMapping("/{city}")
-	public String selectDistricts(@PathVariable("city") String city) {
-		return gson.toJson(cityService.selectDistricts(city));
+	public ResponseEntity<ResponseData> selectDistricts(@PathVariable("city") String city) {
+		return responseProcess.success(cityService.selectDistricts(city));
 	}
 }
