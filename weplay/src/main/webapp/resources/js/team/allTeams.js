@@ -40,8 +40,8 @@ function selectTeams(page){ // 팀 목록 조회
 			keyword : $('#keyword').val()
 		},
 		success : result => {
-			const pageInfo = result[0];
-			const teams = result[1];
+			const pageInfo = result.data.pageInfo;
+			const teams = result.data.teams;
 			
 			$('#result-area').html(createResultStr(pageInfo.listCount));
 

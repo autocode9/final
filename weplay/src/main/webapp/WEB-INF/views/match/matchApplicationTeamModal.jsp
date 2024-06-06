@@ -123,8 +123,8 @@
 					keyword : $('#keyword').val()
 				},
 				success : result => {
-					const pageInfo = result[0];
-					const teams = result[1];
+					const pageInfo = result.data.pageInfo;
+					const teams = result.data.teams;
 					
 					$('#team-result-area').html(createTeamResult(pageInfo.listCount));
 	

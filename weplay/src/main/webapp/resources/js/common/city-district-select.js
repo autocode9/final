@@ -1,15 +1,15 @@
 /**
  * 
  */
- 
 const optionAll = '<option value="all" selected>전체</option>';
-		
-function selectCities(){ // 시도 셀렉트 옵션 조회
+
+// 시도 목록 조회 => 옵션 추가
+// select#sido 필요
+function selectCities(){ 
 	$.ajax({
 		url : 'city',
 		type : 'get',
 		success : result => {
-			console.log(result);
 			const city = result.data;
 			let options = optionAll;
 			for(let i in city){
@@ -20,7 +20,9 @@ function selectCities(){ // 시도 셀렉트 옵션 조회
 	});
 }
 
-function selectDistricts(){ //시군구 셀렉트 옵션 조회
+// 시군구 목록 조회 => 옵션 추가
+// select#sigungu 필요
+function selectDistricts(){ 
 	$.ajax({
 		url : 'city/' + $('#sido').val(),
 		type : 'get',
@@ -32,6 +34,5 @@ function selectDistricts(){ //시군구 셀렉트 옵션 조회
 			}
 			$('#sigungu').html(options);
 		}
-		
 	});
 }

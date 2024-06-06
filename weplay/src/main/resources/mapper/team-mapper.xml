@@ -65,23 +65,23 @@
 		            BY
 		               teamRank)
 		 <choose>
-		 <when test="sido != 'all' and sigungu == 'all' and keyword == 'all'">
+		 	<when test="sido != 'all' and sigungu == 'all' and keyword == 'all'">
 		 WHERE location LIKE '%' || #{sido} || '%'
-		 </when>
-		 <when test="sido != 'all' and sigungu != 'all' and keyword == 'all'">
+		 	</when>
+		 	<when test="sido != 'all' and sigungu != 'all' and keyword == 'all'">
 		 WHERE location = #{sido} || ' ' || #{sigungu}
-		 </when>
-		 <when test="sido == 'all' and sigungu == 'all' and keyword != 'all'">
+		 	</when>
+		 	<when test="sido == 'all' and sigungu == 'all' and keyword != 'all'">
 		 WHERE teamName LIKE '%' || #{keyword} || '%'
-		 </when>
-		 <when test="sido != 'all' and sigungu == 'all' and keyword != 'all'">
+		 	</when>
+		 	<when test="sido != 'all' and sigungu == 'all' and keyword != 'all'">
 		 WHERE location LIKE '%' || #{sido} || '%'
 		   AND teamName LIKE '%' || #{keyword} || '%'
-		 </when>
-		 <when test="sido != 'all' and sigungu != 'all' and keyword != 'all'">
+		 	</when>
+		 	<when test="sido != 'all' and sigungu != 'all' and keyword != 'all'">
 		 WHERE location = #{sido} || ' ' || #{sigungu}
 		   AND teamName LIKE '%' || #{keyword} || '%'
-		 </when>
+		 	</when>
 		 </choose>
 	</select>
 	
