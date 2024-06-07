@@ -162,13 +162,13 @@
             },
             success: function (response) {
                 if (response === 'success') {
-                    alert("게시글이 삭제되었습니다.");
+                    alert("게시판이 삭제되었습니다.");
                     // 삭제된 항목을 화면에서 제거하는 코드를 추가하세요
                     $(element).closest('tr').remove();
                     location.reload();
                 } else {
                     // 실패 시 처리할 내용
-                    alert("게시글 삭제에 실패했습니다.");
+                    alert("게시판 삭제에 실패했습니다.");
                 }
             },
             error: function (xhr, status, error) {
@@ -191,10 +191,10 @@
             success: function (response) {
                 // AJAX 요청 성공 시 처리할 내용
                 if (response === 'success') {
-                    alert("게시글이 성공적으로 등록되었습니다");
+                    alert("게시판 성공적으로 등록되었습니다");
                     location.reload();
                 } else {
-                    alert("게시글 등록에 실패했습니다.");
+                    alert("게시판 등록에 실패했습니다.");
                 }
             },
             error: function (xhr, status, error) {

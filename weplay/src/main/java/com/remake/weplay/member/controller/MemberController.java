@@ -36,6 +36,10 @@ public class MemberController {
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		
 		Member loginUser = memberService.login(member);
+//		System.out.println(loginUser);
+		System.out.println(member.getUserPwd());
+		System.out.println(loginUser.getUserPwd());
+		System.out.println(bcryptPasswordEncoder.matches(member.getUserPwd(), loginUser.getUserPwd()));
 		if(loginUser != null && bcryptPasswordEncoder.matches(member.getUserPwd(), loginUser.getUserPwd())) {
 			session.setAttribute("loginUser", loginUser);
 			
